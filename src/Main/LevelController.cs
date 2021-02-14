@@ -5,10 +5,10 @@ public class LevelController : Node
 {
 	private bool inputAllowed = true;
 	private float maxTilt = 15.0f;
-	private Level currentLevel = null;
+	private KinematicBody currentLevel = null;
 	private Vector3 tilt;
 	
-	public Level CurrentLevel
+	public KinematicBody CurrentLevel
 	{
 		get {return currentLevel;}
 		set {currentLevel = value;}

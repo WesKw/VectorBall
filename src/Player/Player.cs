@@ -5,7 +5,7 @@ public class Player : Spatial
 {
 	[Export]
 	private int lives = 3;
-	private float camSpeed = 1.5f;
+	private float camSpeed = 2.0f;
 	private Camera cam;
 	private Spatial camPivot;
 	private Vector3 camTranslation;

@@ -24,7 +24,7 @@ public class Main : Spatial
 		Level levelInstance = (Level)currentLevel.Instance();
 		levelInstance.Name = "level" + id.ToString();
 		AddChild(levelInstance);
-		controller.CurrentLevel = levelInstance;
+		controller.CurrentLevel = levelInstance.GetNode<KinematicBody>("Geometry/KinematicBody");
 	}
 	
 	private void LoadPlayer()

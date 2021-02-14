@@ -1,12 +1,15 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://src/Levels/level1.cs" type="Script" id=1]
+[ext_resource path="res://src/Levels/Level.cs" type="Script" id=1]
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 400, 1, 400 )
 
 [sub_resource type="SpatialMaterial" id=1]
 albedo_color = Color( 0.027451, 0.517647, 0, 1 )
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 50, 0.251, 50 )
+extents = Vector3( 50, 1, 50 )
 
 [sub_resource type="PanoramaSky" id=3]
 
@@ -20,17 +23,23 @@ fog_color = Color( 0.34902, 0.372549, 0.4, 1 )
 [node name="level1" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="Geometry" type="Spatial" parent="."]
-
-[node name="DeathBarrier" type="Spatial" parent="Geometry"]
+[node name="DeathBarrier" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8.02972, 0 )
 
+[node name="DeathBarrierBody" type="StaticBody" parent="DeathBarrier"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -40, 0 )
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="DeathBarrier/DeathBarrierBody"]
+shape = SubResource( 5 )
+
+[node name="Geometry" type="Spatial" parent="."]
+
 [node name="KinematicBody" type="KinematicBody" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
 
 [node name="Floor" type="CSGBox" parent="Geometry/KinematicBody"]
-use_collision = true
 width = 100.0
-height = 0.5
 depth = 100.0
 material = SubResource( 1 )
 
