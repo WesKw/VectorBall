@@ -18,6 +18,7 @@ public class Title : Control
 		currentBtn = Btn.Start;
 		btnContainer = GetNode("MarginContainer/Buttons/VBoxContainer") as VBoxContainer;
 		btnContainer.GetChild<Button>((int)currentBtn).Modulate = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+		btnContainer.GetChild<Button>(1).Modulate = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 	}
 	
 	public override void _Process(float delta)
@@ -44,6 +45,9 @@ public class Title : Control
 			if((int)currentBtn > 1)
 				currentBtn = Btn.Start;
 		}
+		
+		if(Input.IsKeyPressed(70))
+			OS.WindowFullscreen = !OS.WindowFullscreen;
 		
 		btnContainer.GetChild<Button>((int)previousBtn).Modulate = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 		btnContainer.GetChild<Button>((int)currentBtn).Modulate = new Color(1.0f, 1.0f, 1.0f, 1.0f);

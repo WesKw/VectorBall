@@ -6,6 +6,7 @@ public class Main : Spatial
 	private int levelID = 1;
 	private PackedScene currentLevel;
 	private PackedScene player;
+	private Camera cam;
 	private LevelController controller;
 	
 	// Called when the node enters the scene tree for the first time.
@@ -33,6 +34,7 @@ public class Main : Spatial
 		player = (PackedScene)ResourceLoader.Load(playerPath);
 		Player playerInstance = (Player)player.Instance();
 		playerInstance.Name = "Player";
+		//cam = playerInstance.GetNode<Camera>("CameraPivot");
 		AddChild(playerInstance);
 	}
 }

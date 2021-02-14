@@ -4,6 +4,7 @@ using System;
 public class LevelController : Node
 {
 	private bool inputAllowed = true;
+	private float speed = .5f;
 	private float maxTilt = 15.0f;
 	private KinematicBody currentLevel = null;
 	private Vector3 tilt;
@@ -37,9 +38,10 @@ public class LevelController : Node
 			{
 				tilt.x = vert * maxTilt;
 				tilt.z = horiz * maxTilt;
+					
 			} else {
-				tilt.x /= 2f;
-				tilt.z /= 2f;
+				tilt.x *= .5f;
+				tilt.z *= .5f;
 			}
 			
 			currentLevel.RotationDegrees = tilt;

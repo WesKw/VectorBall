@@ -24,6 +24,9 @@ public class Player : Spatial
 
 	public override void _Process(float delta)
 	{
+		//Vector3 playerVel = playerBody.LinearVelocity;
+		//playerVel.y = 0;
+		//playerBody.LinearVelocity = playerVel;
 		camTranslation = playerBody.Translation;
 		//camTranslation.z += 4.0f;
 		//camTranslation.y += 1.5f;
@@ -31,16 +34,16 @@ public class Player : Spatial
 		
 		float horizCam = Input.GetActionStrength("cam_right") - Input.GetActionStrength("cam_left");
 		//float vertCam = Input.GetActionStrength("cam_up") - Input.GetActionStrength("cam_down");
-		if(playerBody.LinearVelocity.y > 1)
+		if(playerBody.LinearVelocity.y > 0)
 		{
 			if(camRotation.x >= -60.0f)
 				camRotation.x -= 5.0f;
 		} else {
-			if(camRotation.x <= 0)
-				camRotation.x += .5f;
+			if(camRotation.x <= -5.0f)
+				camRotation.x += 5.0f;
+			if(camRotation.x > -6.0f && camRotation.x <= -4.0f)
+				camRotation.x = camRotation.x = -5.0f;
 		}
-		
-		//GD.Print("Y Velocity: " + playerBody.LinearVelocity.y.ToString());
 		
 		camRotation = camPivot.RotationDegrees;
 		camRotation.y  += horizCam * camSpeed;
