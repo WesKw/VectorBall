@@ -1,0 +1,37 @@
+[gd_scene format=2]
+
+[node name="GameUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 35.0
+margin_top = 25.0
+margin_right = -35.0
+margin_bottom = -25.0
+rect_pivot_offset = Vector2( 512, 300 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorldText" type="Control" parent="MarginContainer"]
+margin_right = 954.0
+margin_bottom = 550.0
+
+[node name="Label" type="Label" parent="MarginContainer/WorldText"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -37.0
+margin_right = 204.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LivesText" type="Control" parent="MarginContainer"]
+margin_right = 954.0
+margin_bottom = 550.0
