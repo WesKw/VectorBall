@@ -16,7 +16,7 @@ public class Player : Spatial
 	public override void _Ready()
 	{
 		playerBody = GetNode("RigidBody") as RigidBody;
-		Translation = new Vector3(0, 5.0f, 0);
+		Translation = new Vector3(0, 500.0f, 0);
 		cam = GetNode("CameraPivot/Camera") as Camera;
 		camPivot = GetNode("CameraPivot") as Spatial;
 		camRotation = new Vector3();
@@ -24,29 +24,32 @@ public class Player : Spatial
 
 	public override void _Process(float delta)
 	{
-		//Vector3 playerVel = playerBody.LinearVelocity;
+		Vector3 playerVel = playerBody.LinearVelocity;
 		//playerVel.y = 0;
 		//playerBody.LinearVelocity = playerVel;
-		camTranslation = playerBody.Translation;
+		//camTranslation = ;
 		//camTranslation.z += 4.0f;
 		//camTranslation.y += 1.5f;
-		camPivot.Translation = camTranslation;
+		camPivot.Translation = playerBody.Translation;
 		
 		float horizCam = Input.GetActionStrength("cam_right") - Input.GetActionStrength("cam_left");
 		//float vertCam = Input.GetActionStrength("cam_up") - Input.GetActionStrength("cam_down");
-		if(playerBody.LinearVelocity.y > 0)
-		{
-			if(camRotation.x >= -60.0f)
-				camRotation.x -= 5.0f;
-		} else {
-			if(camRotation.x <= -5.0f)
-				camRotation.x += 5.0f;
-			if(camRotation.x > -6.0f && camRotation.x <= -4.0f)
-				camRotation.x = camRotation.x = -5.0f;
-		}
 		
 		camRotation = camPivot.RotationDegrees;
 		camRotation.y  += horizCam * camSpeed;
+		if(playerBody.LinearVelocity.y < -20.0f)
+		{
+			if(camRotation.x > -45.0f)
+				camRotation.x -= 1.0f;
+			else
+				camRotation.x = -45.0f;
+		} else {
+			if(camRotation.x < 0.0f)
+				camRotation.x += 1.0f;
+			else
+				camRotation.x = 0.0f;
+		}
+		
 		camPivot.RotationDegrees = camRotation;
 	}
 }

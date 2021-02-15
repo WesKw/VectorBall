@@ -5,7 +5,7 @@ public class LevelController : Node
 {
 	private bool inputAllowed = true;
 	private float speed = .5f;
-	private float maxTilt = 15.0f;
+	private float maxTilt = 3.5f;
 	private KinematicBody currentLevel = null;
 	private Vector3 tilt;
 	
