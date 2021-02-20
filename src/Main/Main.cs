@@ -3,18 +3,19 @@ using System;
 
 public class Main : Spatial
 {
+	private string[] levelList;
 	private int levelID = 1;
 	private PackedScene currentLevel;
 	private PackedScene player;
-	private Camera cam;
+	private Spatial cam;
 	private LevelController controller;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		controller = GetNode("LevelController") as LevelController;
-		LoadLevel(levelID);
 		LoadPlayer();
+		LoadLevel(levelID);
 	}
 	
 	//Load instance of level based on level ID
@@ -25,7 +26,8 @@ public class Main : Spatial
 		Level levelInstance = (Level)currentLevel.Instance();
 		levelInstance.Name = "level" + id.ToString();
 		AddChild(levelInstance);
-		controller.CurrentLevel = levelInstance.GetNode<KinematicBody>("Geometry/KinematicBody");
+		controller.CurrentLevel = levelInstance.GetNode<Spatial>("Geometry");
+		controller.PivotPoint = levelInstance.GetNode<Spatial>("PivotPoint");
 	}
 	
 	private void LoadPlayer()
@@ -36,5 +38,7 @@ public class Main : Spatial
 		playerInstance.Name = "Player";
 		//cam = playerInstance.GetNode<Camera>("CameraPivot");
 		AddChild(playerInstance);
+		cam = playerInstance.GetNode("CameraPivot") as Spatial;
+		controller.PlayerCamPivot = cam;
 	}
 }
