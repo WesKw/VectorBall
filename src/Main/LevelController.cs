@@ -5,16 +5,17 @@ public class LevelController : Node
 {
 	private bool inputAllowed = true;
 	private float speed = .5f;
-	private float maxTilt = Mathf.Deg2Rad(8.0f);
+	private float maxTilt = 2.5f;
 	private Spatial currentLevel = null;
 	private Spatial pivotPoint;
 	private Spatial playerCamPivot = null;
 	private Vector3 tilt;
+	private Vector3 gravity = new Vector3(0, -1, 0);
 	
 	public Spatial CurrentLevel
 	{
-		get {return currentLevel;}
-		set {currentLevel = value;}
+		get { return currentLevel; }
+		set { currentLevel = value; }
 	}
 	
 	public bool InputAllowed
@@ -39,18 +40,27 @@ public class LevelController : Node
 	public override void _Ready()
 	{
 		tilt = new Vector3();
+		
 	}
-
-	public override void _PhysicsProcess(float delta)
+	
+	public override void _Process(float delta)
 	{
 		if(inputAllowed)
 		{
 			float horiz = Input.GetActionStrength("tilt_right") - Input.GetActionStrength("tilt_left");
 			float vert = Input.GetActionStrength("tilt_up") - Input.GetActionStrength("tilt_down");
-			
-			TiltLevel(currentLevel, pivotPoint, Vector3.Right, vert * maxTilt);
-			TiltLevel(currentLevel, pivotPoint, Vector3.Back, horiz * maxTilt);
+			gravity.x = horiz * maxTilt;
+			gravity.y = -1;
+			gravity.z = vert * maxTilt;
+			PhysicsServer.AreaSetParam(GetViewport().FindWorld().Space, (PhysicsServer.AreaParameter)1, gravity);
+			//TiltLevel(currentLevel, pivotPoint, Vector3.Right, vert * maxTilt);
+			//TiltLevel(currentLevel, pivotPoint, Vector3.Back, horiz * maxTilt);
 		}
+	}
+
+	public override void _PhysicsProcess(float delta)
+	{
+		
 	}
 	
 	//Algorithm for rotating around pivot
@@ -73,12 +83,4 @@ public class LevelController : Node
 		geometry.GlobalTranslate(start);	//Return level to original location
 	}
 	
-	//Reload the current scene based on button press
-	public override void _UnhandledInput(InputEvent @event)
-	{
-		if(Input.IsActionJustPressed("reset"))
-		{
-			GetTree().ReloadCurrentScene();
-		}
-	}
 }

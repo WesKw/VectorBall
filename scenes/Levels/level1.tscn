@@ -1,25 +1,27 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/Levels/Level.cs" type="Script" id=1]
-[ext_resource path="res://assets/checkerkboard.png" type="Texture" id=2]
+[ext_resource path="res://assets/debug_material.tres" type="Material" id=2]
 [ext_resource path="res://assets/skyboxtest.jpg" type="Texture" id=3]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 400, 1, 400 )
-
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0, 1, 0.109804, 1 )
-albedo_texture = ExtResource( 2 )
 
 [sub_resource type="BoxShape" id=3]
 margin = 1.0
 extents = Vector3( 6, 0.25, 11 )
 
 [sub_resource type="BoxShape" id=4]
-extents = Vector3( 7, 7, 1 )
+extents = Vector3( 1, 6, 1 )
+
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 1, 0.25, 5 )
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 1, 0.254504, 5 )
 
 [sub_resource type="BoxShape" id=9]
-extents = Vector3( 1, 0.25, 5 )
+extents = Vector3( 5, 0.25, 2 )
 
 [sub_resource type="PanoramaSky" id=7]
 panorama = ExtResource( 3 )
@@ -55,35 +57,70 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 width = 12.0
 height = 0.5
 depth = 22.0
-material = SubResource( 2 )
+material = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Geometry/KinematicBody"]
 shape = SubResource( 3 )
 
 [node name="Wall" type="KinematicBody" parent="Geometry/KinematicBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -15 )
 
 [node name="CSGBox" type="CSGBox" parent="Geometry/KinematicBody/Wall"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 12 )
-width = 14.0
 height = 12.0
 
 [node name="CollisionShape" type="CollisionShape" parent="Geometry/KinematicBody/Wall"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 12 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 12 )
 shape = SubResource( 4 )
 
-[node name="KinematicBody" type="KinematicBody" parent="Geometry/KinematicBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -22 )
+[node name="Floor2" type="KinematicBody" parent="Geometry/KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -21 )
 
-[node name="Floor2" type="CSGBox" parent="Geometry/KinematicBody/KinematicBody"]
+[node name="Floor2" type="CSGBox" parent="Geometry/KinematicBody/Floor2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6 )
 height = 0.5
 depth = 10.0
-material = SubResource( 2 )
+material = ExtResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="Geometry/KinematicBody/KinematicBody"]
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/KinematicBody/Floor2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6 )
+shape = SubResource( 5 )
+
+[node name="Floor3" type="KinematicBody" parent="Geometry/KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -31 )
+
+[node name="Floor2" type="CSGBox" parent="Geometry/KinematicBody/Floor3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6 )
+height = 0.5
+depth = 10.0
+material = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/KinematicBody/Floor3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6 )
+shape = SubResource( 6 )
+
+[node name="Floor4" type="KinematicBody" parent="Geometry/KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -31 )
+
+[node name="Floor2" type="CSGBox" parent="Geometry/KinematicBody/Floor4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6 )
+width = 10.0
+height = 0.5
+depth = 4.0
+material = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/KinematicBody/Floor4"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6 )
 shape = SubResource( 9 )
+
+[node name="Floor5" type="KinematicBody" parent="Geometry/KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -31 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="Geometry/KinematicBody/Floor5"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6 )
+radius = 4.0
+height = 0.5
+material = ExtResource( 2 )
 
 [node name="PivotPoint" type="Spatial" parent="."]
 

@@ -19,6 +19,8 @@ public class Level : Spatial
 	public override void _Ready()
 	{
 		GetNode<Area>("DeathBarrier/DeathArea").Connect("area_entered", this, nameof(_on_DeathArea_area_entered));
+		//LevelController controller = GetNode<LevelController>("../LevelController");
+		//controller.Connect("fall_out", controller, nameof(on_fallout));
 		pivotPoint = GetNode("PivotPoint") as Spatial;
 		//stage = rotatePivot.GetChild(0) as KinematicBody;
 		//stage.SetAsToplevel(true);
@@ -27,12 +29,15 @@ public class Level : Spatial
 
 	public override void _PhysicsProcess(float delta)
 	{
+		Vector3 position = player.Translation;
 		//if(player.AngularVelocity.y < 1 && player.AngularVelocity.y > -1)
-		pivotPoint.Translation = player.Translation;
+		position.y -= .5f;
+		pivotPoint.Translation = position;
 	}
 	
 	private void _on_DeathArea_area_entered(object area)
 	{
-		// Replace with function body.
+		GD.Print("Death!");
+		EmitSignal(nameof(fall_out));
 	}
 }

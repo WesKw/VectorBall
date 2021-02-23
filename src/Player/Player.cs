@@ -3,10 +3,11 @@ using System;
 
 public class Player : Spatial
 {
+	private bool inputAllowed = true;
 	private bool grounded;
 	[Export]
 	private int lives = 3;
-	private float acceleration = 15.0f;
+	private float maxTilt = 2.0f;
 	private float maxVelocity = 120;
 	private float camSpeed = 2.0f;
 	private Camera cam;
@@ -14,6 +15,7 @@ public class Player : Spatial
 	private Vector3 camTranslation;
 	private Vector3 camRotation;
 	private RigidBody playerBody;
+	private Vector3 gravity = new Vector3(0, -1, 0);
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -25,50 +27,46 @@ public class Player : Spatial
 		camRotation = new Vector3();
 	}
 	
-	private void AdjustVelocity()
+	public override void _Process(float delta)
 	{
-		float horiz = Input.GetActionStrength("tilt_right") - Input.GetActionStrength("tilt_left");
-		float vert = Input.GetActionStrength("tilt_up") - Input.GetActionStrength("tilt_down");
-		
-		Vector3 force = new Vector3(vert * acceleration, horiz * acceleration, 0);
-		
-		if (vert > 0 || horiz > 0 || vert < 0 || horiz < 0)
+		if(inputAllowed)
 		{
-			playerBody.AddForce(force, playerBody.Translation);
-		}
-		else
-		{
+			float horiz = Input.GetActionStrength("tilt_right") - Input.GetActionStrength("tilt_left");
+			float vert = Input.GetActionStrength("tilt_up") - Input.GetActionStrength("tilt_down");
+			gravity.x = horiz * maxTilt;
+			gravity.y = -1;
+			gravity.z = -vert * maxTilt;
+			PhysicsServer.AreaSetParam(GetViewport().FindWorld().Space, (PhysicsServer.AreaParameter)1, gravity);
 			
+			Vector3 playerVel = playerBody.LinearVelocity;
+			camPivot.Translation = playerBody.Translation;
+		
+			float horizCam = Input.GetActionStrength("cam_right") - Input.GetActionStrength("cam_left");
+		
+			camRotation = camPivot.RotationDegrees;
+			camRotation.y  += horizCam * camSpeed;
+		
+			if(playerBody.LinearVelocity.y < -10.0f)
+			{
+				camRotation.x = Mathf.Lerp(camRotation.x, -45.0f, .3f);
+			} else {
+				camRotation.x = Mathf.Lerp(camRotation.x, 0.0f, .3f);
+			}
+		
+			camPivot.RotationDegrees = camRotation;
 		}
 	}
 	
-	public override void _Process(float delta)
+	public override void _UnhandledInput(InputEvent @event)
 	{
-		AdjustVelocity();
-		
-		Vector3 playerVel = playerBody.LinearVelocity;
-		camPivot.Translation = playerBody.Translation;
-		
-		float horizCam = Input.GetActionStrength("cam_right") - Input.GetActionStrength("cam_left");
-		//float vertCam = Input.GetActionStrength("cam_up") - Input.GetActionStrength("cam_down");
-		
-		camRotation = camPivot.RotationDegrees;
-		camRotation.y  += horizCam * camSpeed;
-		
-		if(playerBody.LinearVelocity.y < -20.0f)
+		if(Input.IsActionJustPressed("reset"))
 		{
-			if(camRotation.x > -45.0f)
-				camRotation.x -= 1.0f;
-			else
-				camRotation.x = -45.0f;
-		} else {
-			if(camRotation.x < 0.0f)
-				camRotation.x += 1.0f;
-			else
-				camRotation.x = 0.0f;
+			GetTree().ReloadCurrentScene();
 		}
+	}
+	
+	public void on_fallout()
+	{
 		
-		
-		camPivot.RotationDegrees = camRotation;
 	}
 }

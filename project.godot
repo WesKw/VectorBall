@@ -124,6 +124,10 @@ reset={
  ]
 }
 
+[physics]
+
+3d/physics_engine="GodotPhysics"
+
 [rendering]
 
 quality/filters/msaa=1
