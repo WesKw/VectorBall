@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[sub_resource type="ParticlesMaterial" id=1]
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3( 0, 0.15, 0 )
+spread = 12.0
+flatness = 0.15
+gravity = Vector3( 0, -15, 0 )
+initial_velocity = 5.0
+initial_velocity_random = 0.5
+angular_velocity = 5.0
+angular_velocity_random = 0.55
+radial_accel = 2.0
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.945098, 1, 0, 1 )
+metallic_specular = 1.0
+clearcoat_enabled = true
+clearcoat = 1.0
+clearcoat_gloss = 1.0
+
+[sub_resource type="PrismMesh" id=2]
+material = SubResource( 3 )
+size = Vector3( 0.1, 0.1, 0.1 )
+
+[node name="HitParticles" type="Particles"]
+amount = 4
+lifetime = 4.0
+preprocess = 2.0
+explosiveness = 1.0
+randomness = 1.0
+visibility_aabb = AABB( -1, -1, -1, 2, 2, 2 )
+process_material = SubResource( 1 )
+draw_passes = 4
+draw_pass_1 = SubResource( 2 )
+draw_pass_2 = null
+draw_pass_3 = null
+draw_pass_4 = null

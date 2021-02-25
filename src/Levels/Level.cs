@@ -29,10 +29,10 @@ public class Level : Spatial
 
 	public override void _PhysicsProcess(float delta)
 	{
-		Vector3 position = player.Translation;
+		//Vector3 position = player.Translation;
 		//if(player.AngularVelocity.y < 1 && player.AngularVelocity.y > -1)
-		position.y -= .5f;
-		pivotPoint.Translation = position;
+		//position.y -= .5f;
+		//pivotPoint.Translation = position;
 	}
 	
 	private void _on_DeathArea_area_entered(object area)

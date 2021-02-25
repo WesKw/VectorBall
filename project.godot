@@ -127,6 +127,7 @@ reset={
 [physics]
 
 3d/physics_engine="GodotPhysics"
+3d/default_linear_damp=1.0
 
 [rendering]
 
