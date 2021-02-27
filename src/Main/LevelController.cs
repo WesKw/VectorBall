@@ -4,12 +4,12 @@ using System;
 public class LevelController : Node
 {
 	private bool inputAllowed = true;
-	private float speed = .5f;
+	//private float speed = .5f;
 	private float maxTilt = 2.5f;
 	private Spatial currentLevel = null;
 	private Spatial pivotPoint;
 	private Spatial playerCamPivot = null;
-	private Vector3 tilt;
+	//private Vector3 tilt;
 	private Vector3 gravity = new Vector3(0, -1, 0);
 	
 	public Spatial CurrentLevel
@@ -39,7 +39,6 @@ public class LevelController : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		tilt = new Vector3();
 		
 	}
 	
@@ -82,5 +81,4 @@ public class LevelController : Node
 		geometry.Transform = geometry.Transform.Rotated(axis, -rot);	//Rotate based on axis and rotation
 		geometry.GlobalTranslate(start);	//Return level to original location
 	}
-	
 }

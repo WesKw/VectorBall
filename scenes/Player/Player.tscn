@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Player/Player.cs" type="Script" id=1]
+[ext_resource path="res://src/Player/PlayerBody.cs" type="Script" id=2]
 
 [sub_resource type="PhysicsMaterial" id=1]
 rough = true
@@ -31,7 +32,8 @@ gravity_scale = 2.5
 continuous_cd = true
 contacts_reported = 6
 contact_monitor = true
-axis_lock_angular_y = true
+can_sleep = false
+script = ExtResource( 2 )
 
 [node name="Body" type="CSGSphere" parent="RigidBody"]
 operation = 1

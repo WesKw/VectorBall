@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 400, 5, 400 )
+
+[node name="DeathBarrier" type="Spatial"]
+
+[node name="DeathArea" type="Area" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="DeathArea"]
+shape = SubResource( 1 )
