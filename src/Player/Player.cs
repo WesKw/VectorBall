@@ -94,31 +94,29 @@ public class Player : Spatial
 	
 	public void Reset()
 	{
-		if(lives < 1)
-		{
-			//Set lives back to 3 then go back to main menu
-			Lives = 3;
-			GetTree().ChangeScene("res://scenes/Title/Title.tscn");
-		} else 
-		{
-			//playerBody.Translation = new Vector3(0, 5.0f, 0);
-			playerBody.Reset = true;
-			inputAllowed = true;
-			camPivot.Translation = playerBody.Translation;
-			camPivot.RotationDegrees *= 0;
-			Lives--;
-			GD.Print(lives);
-			gravity = new Vector3(0, -1, 0);
-			PhysicsServer.AreaSetParam(GetViewport().FindWorld().Space, (PhysicsServer.AreaParameter)1, gravity);
-		}
+		playerBody.Reset = true;
+		inputAllowed = true;
+		camPivot.Translation = playerBody.Translation;
+		camPivot.RotationDegrees *= 0;
+		gravity = new Vector3(0, -1, 0);
+		PhysicsServer.AreaSetParam(GetViewport().FindWorld().Space, (PhysicsServer.AreaParameter)1, gravity);
 	}
 	
 	//When player falls off the stage
 	public void FallOut()
 	{
-		inputAllowed = false;
-		GD.Print("Player has fallen");
-		fallTimer.Enabled = true;
+		if(lives < 1)
+		{
+			Lives = 3;
+			GetTree().ChangeScene("res://scenes/Title/Title.tscn");
+		} else
+		{
+			Lives--;
+			GD.Print(Lives);
+			inputAllowed = false;
+			GD.Print("Player has fallen");
+			fallTimer.Enabled = true;
+		}
 	}
 	
 	//When player reaches the goal

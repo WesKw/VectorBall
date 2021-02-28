@@ -5,7 +5,7 @@
 
 [sub_resource type="PhysicsMaterial" id=1]
 rough = true
-bounce = 0.35
+bounce = 0.45
 
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0, 0.721569, 0.721569, 0.439216 )

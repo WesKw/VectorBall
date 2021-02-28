@@ -3,7 +3,8 @@ using System;
 
 public class Main : Spatial
 {
-	private string[] levelList = {"", "" };
+	private string[] levelList = {"Beginner", "Split", "Downhill" };
+	[Export]
 	private int levelID = 1;
 	private PackedScene currentLevel;
 	private PackedScene playerScene;
@@ -62,19 +63,21 @@ public class Main : Spatial
 	{
 		player.Goal();
 		GD.Print("level finished!");
-		if(levelID < levelList.Length)
-		{
-			levelID++;
-			loadTimer.Enabled = true;
-		} else
-		{
-			
-		}
+		levelID++;
+		loadTimer.Enabled = true;
 	}
 	
 	private void LoadTimerElapsed(System.Object source, System.Timers.ElapsedEventArgs e)
 	{
-		GD.Print("Load next level now");
+		if(levelID > 3) GetTree().ChangeScene("res://scenes/Title/Title.tscn");
+		else
+		{
+			GD.Print("Load next level now");
+			//Remove current level
+			level.QueueFree();
+			LoadLevel(levelID);
+			player.Reset();
+		}
 	}
 	
 	private void on_fall_out()

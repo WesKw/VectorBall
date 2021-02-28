@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/skyboxtest.jpg" type="Texture" id=1]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 1 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_sky_custom_fov = 95.0
+background_color = Color( 1, 1, 1, 1 )
+ambient_light_color = Color( 1, 1, 0.996078, 1 )
+ambient_light_sky_contribution = 0.0
+fog_enabled = true
+fog_color = Color( 0.572549, 0.572549, 0.572549, 1 )
+
+[node name="BeginnerWorldEnv" type="WorldEnvironment"]
+environment = SubResource( 2 )
