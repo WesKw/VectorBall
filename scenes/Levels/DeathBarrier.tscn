@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
 [sub_resource type="BoxShape" id=1]
-extents = Vector3( 400, 5, 400 )
+extents = Vector3( 1000, 5, 1000 )
 
 [node name="DeathBarrier" type="Spatial"]
 

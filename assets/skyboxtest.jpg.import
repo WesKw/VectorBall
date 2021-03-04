@@ -14,12 +14,12 @@ dest_files=[ "res://.import/skyboxtest.jpg-ac2ac60904f4fe207489d6b8b48bb610.stex
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=2
 flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false

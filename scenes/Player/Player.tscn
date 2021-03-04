@@ -1,15 +1,18 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://src/Player/PlayerBody.cs" type="Script" id=2]
+[ext_resource path="res://assets/balltexture.png" type="Texture" id=3]
 
 [sub_resource type="PhysicsMaterial" id=1]
 rough = true
 bounce = 0.45
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0, 0.721569, 0.721569, 0.439216 )
-metallic = 0.2
+flags_transparent = true
+params_diffuse_mode = 4
+albedo_color = Color( 0, 0.678431, 1, 1 )
+albedo_texture = ExtResource( 3 )
 clearcoat_enabled = true
 clearcoat = 1.0
 clearcoat_gloss = 0.77
@@ -49,6 +52,6 @@ shape = SubResource( 3 )
 [node name="CameraPivot" type="Spatial" parent="."]
 
 [node name="Camera" type="Camera" parent="CameraPivot"]
-transform = Transform( 1, 0, 0, 0, 0.996195, 0.0871557, 0, -0.0871557, 0.996195, 0, 0.8, 1.75 )
+transform = Transform( 1, 0, 0, 0, 0.993572, 0.113203, 0, -0.113203, 0.993572, 0, 0.8, 1.75 )
 fov = 90.0
-far = 500.0
+far = 1000.0

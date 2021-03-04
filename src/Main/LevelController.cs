@@ -52,8 +52,6 @@ public class LevelController : Node
 			gravity.y = -1;
 			gravity.z = vert * maxTilt;
 			PhysicsServer.AreaSetParam(GetViewport().FindWorld().Space, (PhysicsServer.AreaParameter)1, gravity);
-			//TiltLevel(currentLevel, pivotPoint, Vector3.Right, vert * maxTilt);
-			//TiltLevel(currentLevel, pivotPoint, Vector3.Back, horiz * maxTilt);
 		}
 	}
 

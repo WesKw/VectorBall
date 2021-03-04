@@ -3,7 +3,9 @@ using System;
 
 public class Main : Spatial
 {
-	private string[] levelList = {"Beginner", "Split", "Downhill" };
+	private bool reset;
+	private string[] levelList = {"Beginner", "Split", "Downhill", "Uphill", "Sideways",
+								  "Elevator", "Button", "Rotation", "Airtime", "Test" };
 	[Export]
 	private int levelID = 1;
 	private PackedScene currentLevel;
@@ -13,12 +15,20 @@ public class Main : Spatial
 	private Level level;
 	private System.Timers.Timer loadTimer = new System.Timers.Timer(5000);
 	private Control gameUI;
+	private AnimationPlayer UIAnimator;
 	//private LevelController controller;
+	
+	public bool Reset
+	{
+		get { return reset; }
+		set { reset = value; }
+	}
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		gameUI = GetNode<Control>("GameUI");
+		UIAnimator = gameUI.GetNode("AnimationPlayer") as AnimationPlayer;
 		loadTimer.AutoReset = false;
 		loadTimer.Enabled = false;
 		loadTimer.Elapsed += LoadTimerElapsed;
@@ -34,12 +44,15 @@ public class Main : Spatial
 			
 		if(!level.IsConnected("level_finished", this, nameof(on_level_finished)))
 			level.Connect("level_finished", this, nameof(on_level_finished));
+			
+		if(!level.IsConnected("ready", this, nameof(on_level_ready)))
+			level.Connect("ready", this, nameof(on_level_ready));
 	}
 	
 	//Load instance of level based on level ID
 	private void LoadLevel(int id)
 	{
-		string levelPath = "res://scenes/Levels/level" + id.ToString() + ".tscn";
+		string levelPath = "res://scenes/Levels/Stages/level" + id.ToString() + ".tscn";
 		currentLevel = (PackedScene)ResourceLoader.Load(levelPath);
 		level = (Level)currentLevel.Instance();
 		level.Name = "level" + id.ToString();
@@ -69,7 +82,11 @@ public class Main : Spatial
 	
 	private void LoadTimerElapsed(System.Object source, System.Timers.ElapsedEventArgs e)
 	{
-		if(levelID > 3) GetTree().ChangeScene("res://scenes/Title/Title.tscn");
+		UIAnimator.Play("FadeOut");
+		if(levelID > levelList.Length)
+		{
+			GetTree().ChangeScene("res://scenes/Title/Title.tscn");
+		}
 		else
 		{
 			GD.Print("Load next level now");
@@ -77,11 +94,25 @@ public class Main : Spatial
 			level.QueueFree();
 			LoadLevel(levelID);
 			player.Reset();
+			UIAnimator.Play("FadeIn");
 		}
 	}
 	
 	private void on_fall_out()
 	{
+		Reset = true;
 		player.FallOut();
+	}
+	
+	private void on_reset()
+	{
+		UIAnimator.Play("FadeOut");;
+		Reset = false;
+		UIAnimator.Play("FadeIn");
+	}
+	
+	private void on_level_ready()
+	{
+		UIAnimator.Play("FadeIn");
 	}
 }

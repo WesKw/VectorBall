@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/debug_material.tres" type="Material" id=1]
+[ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Levels/StartPlatform.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Levels/BeginnerWorldEnv.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Levels/Level.cs" type="Script" id=6]
+[ext_resource path="res://scenes/Levels/BeginnerLight.tscn" type="PackedScene" id=7]
+
+[node name="level5" type="Spatial"]
+script = ExtResource( 6 )
+
+[node name="DeathBarrier" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -52.9734, 0 )
+
+[node name="Geometry" type="Spatial" parent="."]
+
+[node name="Floor1" parent="Geometry" instance=ExtResource( 3 )]
+
+[node name="floor2" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -25 )
+use_collision = true
+width = 6.0
+height = 0.65
+depth = 8.0
+material = ExtResource( 1 )
+
+[node name="hill1" type="CSGPolygon" parent="Geometry"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, -2, -29 )
+use_collision = true
+polygon = PoolVector2Array( 0, -5, 0, 1, 9, -5, 9, -7 )
+depth = 4.0
+material = ExtResource( 1 )
+
+[node name="hill2" type="CSGPolygon" parent="Geometry"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, -8, -46 )
+use_collision = true
+polygon = PoolVector2Array( 0, -5, 0, 1, 9, -5, 9, -7 )
+depth = 4.0
+material = ExtResource( 1 )
+
+[node name="hill3" type="CSGPolygon" parent="Geometry"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -15, -14, -42 )
+use_collision = true
+polygon = PoolVector2Array( 0, -5, 0, 1, 9, -5, 9, -7 )
+depth = 4.0
+material = ExtResource( 1 )
+
+[node name="hill4" type="CSGPolygon" parent="Geometry"]
+transform = Transform( 1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -24, -21, -27 )
+use_collision = true
+polygon = PoolVector2Array( 0, -5, 0, 2, 30, -19, 30, -21 )
+depth = 4.0
+material = ExtResource( 1 )
+
+[node name="CSGPolygon2" type="CSGPolygon" parent="Geometry"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, -8, -38 )
+use_collision = true
+polygon = PoolVector2Array( 0, -1, 0, 1, 8, 1, 8, -1 )
+depth = 4.0
+material = ExtResource( 1 )
+
+[node name="CSGPolygon3" type="CSGPolygon" parent="Geometry"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -11, -14, -38 )
+use_collision = true
+polygon = PoolVector2Array( 0, -1, 0, 1, 8, 1, 8, -1 )
+depth = 4.0
+material = ExtResource( 1 )
+
+[node name="CSGPolygon4" type="CSGPolygon" parent="Geometry"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -24, -20, -34 )
+use_collision = true
+polygon = PoolVector2Array( -7, -1, -7, 1, 8, 1, 8, -1 )
+depth = 4.0
+material = ExtResource( 1 )
+
+[node name="CSGPolygon5" type="CSGPolygon" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -41, -27 )
+use_collision = true
+polygon = PoolVector2Array( -7, -1, -7, 1, 8, 1, 8, -1 )
+depth = 4.0
+material = ExtResource( 1 )
+
+[node name="Goal" parent="Geometry" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -39, -29 )
+
+[node name="BeginnerWorldEnv" parent="." instance=ExtResource( 5 )]
+
+[node name="DirectionalLight" parent="." instance=ExtResource( 7 )]

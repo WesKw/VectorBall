@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/space_material.tres" type="Material" id=2]
+
+[node name="Floor1" type="CSGBox"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7 )
+use_collision = true
+width = 10.0
+height = 0.65
+depth = 28.0
+material = ExtResource( 2 )
+
+[node name="Railing1" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.83945, 0.399954, 2 )
+use_collision = true
+width = 0.25
+height = 1.0
+depth = 23.902
+material = ExtResource( 2 )
+
+[node name="Railing2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.82755, 0.399954, 2 )
+use_collision = true
+width = 0.25
+height = 1.0
+depth = 23.902
+material = ExtResource( 2 )
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.757546, 13.7674 )
+width = 9.93007
+height = 0.878027
+depth = 0.412923
+material = ExtResource( 2 )

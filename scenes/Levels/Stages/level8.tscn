@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/Levels/Level.cs" type="Script" id=1]
+[ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Levels/BeginnerWorldEnv.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Levels/BeginnerLight.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Levels/StartPlatform.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/debug_material.tres" type="Material" id=7]
+
+[node name="level8" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="DeathBarrier" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0 )
+
+[node name="Geometry" type="Spatial" parent="."]
+
+[node name="Floor1" parent="Geometry" instance=ExtResource( 5 )]
+
+[node name="Goal" parent="Geometry" instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -125 )
+
+[node name="CSGBox" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -37 )
+use_collision = true
+width = 10.0
+height = 1.0
+depth = 30.0
+material = ExtResource( 7 )
+
+[node name="CSGBox3" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -67 )
+use_collision = true
+width = 10.0
+height = 1.0
+depth = 30.0
+material = ExtResource( 7 )
+
+[node name="CSGBox5" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -97 )
+use_collision = true
+width = 10.0
+height = 1.0
+depth = 30.0
+material = ExtResource( 7 )
+
+[node name="CSGBox7" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -125 )
+use_collision = true
+width = 22.0
+depth = 22.0
+material = ExtResource( 7 )
+
+[node name="CSGBox2" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.53146, -51.7385 )
+use_collision = true
+width = 9.99131
+height = 0.5
+depth = 0.5
+material = ExtResource( 7 )
+
+[node name="CSGBox4" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.38917, -77.7385 )
+use_collision = true
+width = 9.99131
+height = 0.5
+depth = 0.5
+material = ExtResource( 7 )
+
+[node name="CSGBox6" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.57559, -111.739 )
+use_collision = true
+width = 9.99131
+height = 0.5
+depth = 0.5
+material = ExtResource( 7 )
+
+[node name="BeginnerWorldEnv" parent="." instance=ExtResource( 3 )]
+
+[node name="DirectionalLight" parent="." instance=ExtResource( 4 )]

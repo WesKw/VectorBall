@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/spaceskybox.jpg" type="Texture" id=1]
+[ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Levels/Level.cs" type="Script" id=3]
+[ext_resource path="res://scenes/Levels/SpaceStartPlatform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/space_material.tres" type="Material" id=6]
+[ext_resource path="res://scenes/Levels/SpaceBackground.tscn" type="PackedScene" id=7]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 1 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+
+[sub_resource type="CapsuleShape" id=3]
+radius = 8.0
+height = 52.0
+
+[node name="level90" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="SpaceEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+
+[node name="DeathBarrier" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -54, 0 )
+
+[node name="Geometry" type="Spatial" parent="."]
+
+[node name="Floor1" parent="Geometry" instance=ExtResource( 4 )]
+
+[node name="Goal" parent="Geometry" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 1, -30 )
+
+[node name="StaticBody" type="StaticBody" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, -48 )
+constant_angular_velocity = Vector3( 0, 0, 10 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="Geometry/StaticBody"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+use_collision = true
+radius = 8.0
+height = 52.0
+sides = 17
+material = ExtResource( 6 )
+
+[node name="StaticBody2" type="StaticBody" parent="Geometry"]
+transform = Transform( -4.2222e-08, -0.258819, 0.965926, -1.13133e-08, 0.965926, 0.258819, -1, 0, -4.37114e-08, 35, -14, -83 )
+constant_linear_velocity = Vector3( 400, 0, 0 )
+constant_angular_velocity = Vector3( 400, 0, 0 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="Geometry/StaticBody2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+use_collision = true
+radius = 8.0
+height = 52.0
+sides = 17
+material = ExtResource( 6 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Geometry/StaticBody2"]
+shape = SubResource( 3 )
+
+[node name="CSGBox" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, -82 )
+use_collision = true
+width = 8.0
+height = 6.0
+depth = 8.0
+material = ExtResource( 6 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 47, 54 )
+light_color = Color( 0.686275, 0.713726, 1, 1 )
+light_energy = 4.0
+shadow_enabled = true
+directional_shadow_max_distance = 200.0
+
+[node name="SpaceBackground" parent="." instance=ExtResource( 7 )]

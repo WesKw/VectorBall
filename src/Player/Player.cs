@@ -9,7 +9,7 @@ public class Player : Spatial
 	private bool grounded;
 	private static int lives = 3;
 	private float maxSpeed = .60f;
-	private float maxTilt = 30.0f;
+	private float maxTilt = 31.0f;
 	private float maxVelocity = 120;
 	private float camSpeed = 2.0f;
 	private Camera cam;
@@ -20,8 +20,8 @@ public class Player : Spatial
 	private Vector3 gravity = new Vector3(0, -1, 0);
 	private System.Timers.Timer fallTimer = new System.Timers.Timer(3500);
 	
-	//[Signal]
-	//public delegate void on_fallout();
+	[Signal]
+	public delegate void on_reset();
 	
 	[Signal]
 	public delegate void game_over();
@@ -43,6 +43,7 @@ public class Player : Spatial
 		cam = GetNode("CameraPivot/Camera") as Camera;
 		camPivot = GetNode("CameraPivot") as Spatial;
 		camRotation = new Vector3();
+		Connect("on_reset", GetNode<Main>(".."), nameof(on_reset));
 	}
 	
 	private void ProcessInput()
@@ -66,12 +67,14 @@ public class Player : Spatial
 		camPivot.Translation = playerBody.Translation;
 		
 		camRotation = camPivot.RotationDegrees;
+		//camRotation.x = Mathf.Lerp(camRotation.x, playerVel.y * -vert * maxTilt, .2f);
 		camRotation.x = Mathf.Lerp(camRotation.x, -vert * maxTilt, .2f);
 		camRotation.y -= horiz * camSpeed;
+		//camRotation.y = Mathf.Lerp(camRotation.y, horiz * playerVel, .2f * camSpeed);
 		camRotation.z = Mathf.Lerp(camRotation.z, horiz * maxTilt / 2, .2f);
 		
 		//Moves the camera above the player if the player is falling
-		if(playerBody.LinearVelocity.y < -10.0f)
+		if(playerBody.LinearVelocity.y < -15.0f)
 			camRotation.x = Mathf.Lerp(camRotation.x, -45.0f, .3f);
 		else
 			camRotation.x = Mathf.Lerp(camRotation.x, 0.0f, .3f);
@@ -100,23 +103,15 @@ public class Player : Spatial
 		camPivot.RotationDegrees *= 0;
 		gravity = new Vector3(0, -1, 0);
 		PhysicsServer.AreaSetParam(GetViewport().FindWorld().Space, (PhysicsServer.AreaParameter)1, gravity);
+		EmitSignal(nameof(on_reset));
 	}
 	
 	//When player falls off the stage
 	public void FallOut()
 	{
-		if(lives < 1)
-		{
-			Lives = 3;
-			GetTree().ChangeScene("res://scenes/Title/Title.tscn");
-		} else
-		{
-			Lives--;
-			GD.Print(Lives);
-			inputAllowed = false;
-			GD.Print("Player has fallen");
-			fallTimer.Enabled = true;
-		}
+		inputAllowed = false;
+		GD.Print("Player has fallen");
+		fallTimer.Enabled = true;
 	}
 	
 	//When player reaches the goal
@@ -129,5 +124,17 @@ public class Player : Spatial
 	}
 	
 	//Call reset when timer is elapsed
-	private void FallTimerElapsed(System.Object source, System.Timers.ElapsedEventArgs e) => Reset();
+	private void FallTimerElapsed(System.Object source, System.Timers.ElapsedEventArgs e)
+	{
+		if(lives < 1)
+		{
+			Lives = 3;
+			GetTree().ChangeScene("res://scenes/Title/Title.tscn");
+		} else
+		{
+			Lives--;
+			GD.Print(Lives);
+			Reset();
+		}
+	}
 }

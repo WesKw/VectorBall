@@ -30,8 +30,11 @@ public class Level : Spatial
 	
 	private void _on_DeathArea_area_entered(object body)
 	{
-		GD.Print("Fall out!");
-		EmitSignal(nameof(fall_out));
+		if(body is PlayerBody)
+		{
+			GD.Print("Fall out!");
+			EmitSignal(nameof(fall_out));
+		}
 	}
 	
 	private void _on_Goal_entered(object body)

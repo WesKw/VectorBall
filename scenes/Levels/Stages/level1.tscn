@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/Levels/Level.cs" type="Script" id=1]
 [ext_resource path="res://assets/debug_material.tres" type="Material" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Levels/StartPlatform.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Levels/BeginnerLight.tscn" type="PackedScene" id=7]
 
 [node name="level1" type="Spatial"]
 script = ExtResource( 1 )
@@ -18,13 +19,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0 )
 [node name="KinematicBody" type="KinematicBody" parent="Geometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
-[node name="Floor1" parent="Geometry/KinematicBody" instance=ExtResource( 6 )]
-
 [node name="CSGCylinder" type="CSGCylinder" parent="Geometry/KinematicBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0607429, -31 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0607429, -64 )
 operation = 1
 use_collision = true
-radius = 12.0
+radius = 21.0
 height = 0.5
 material = ExtResource( 2 )
 
@@ -32,21 +31,24 @@ material = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00277019, 0.399954, 6.75251 )
 operation = 1
 use_collision = true
-width = 5.48315
+width = 10.0
 height = 1.0
 depth = 0.442061
 material = ExtResource( 2 )
 
+[node name="Floor1" parent="Geometry/KinematicBody" instance=ExtResource( 6 )]
+
+[node name="CSGBox" type="CSGBox" parent="Geometry/KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34 )
+use_collision = true
+width = 10.0
+height = 0.65
+depth = 26.0
+material = ExtResource( 2 )
+
 [node name="Goal" parent="Geometry" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -35 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -64 )
 
 [node name="BeginnerWorldEnv" parent="." instance=ExtResource( 3 )]
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( -0.991911, 0.125788, 0.0170162, -0.0971776, -0.838774, 0.535737, 0.0816621, 0.52975, 0.844213, 1.72807, 36.1748, 62.9839 )
-light_energy = 3.41
-shadow_enabled = true
-shadow_bias = -3.0
-directional_shadow_blend_splits = true
-directional_shadow_normal_bias = 10.0
-directional_shadow_depth_range = 1
+[node name="DirectionalLight" parent="." instance=ExtResource( 7 )]

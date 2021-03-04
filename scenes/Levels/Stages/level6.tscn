@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Levels/StartPlatform.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Levels/Level.cs" type="Script" id=3]
+[ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Levels/BeginnerWorldEnv.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/debug_material.tres" type="Material" id=6]
+[ext_resource path="res://scenes/Levels/Elevator.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Levels/BeginnerLight.tscn" type="PackedScene" id=8]
+
+[node name="level6" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Geometry" type="Spatial" parent="."]
+
+[node name="Floor1" parent="Geometry" instance=ExtResource( 2 )]
+
+[node name="Goal" parent="Geometry" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, -71 )
+
+[node name="CSGBox" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -31 )
+use_collision = true
+width = 20.0
+depth = 18.0
+material = ExtResource( 6 )
+
+[node name="CSGBox2" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -46 )
+use_collision = true
+width = 10.0
+depth = 12.0
+material = ExtResource( 6 )
+
+[node name="CSGBox3" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19, -69 )
+use_collision = true
+width = 10.0
+depth = 12.0
+material = ExtResource( 6 )
+
+[node name="Elevator" parent="Geometry" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22, -57 )
+
+[node name="DeathBarrier" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -38, 0 )
+
+[node name="BeginnerWorldEnv" parent="." instance=ExtResource( 5 )]
+
+[node name="DirectionalLight" parent="." instance=ExtResource( 8 )]
