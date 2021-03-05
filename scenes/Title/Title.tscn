@@ -1,7 +1,25 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Title/Title.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Title/Title.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/title.png" type="Texture" id=3]
+[ext_resource path="res://assets/Music/SFX_1.ogg" type="AudioStream" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "FadeIn"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Logo:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 2.07053 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Title" type="Control"]
 anchor_right = 1.0
@@ -63,5 +81,24 @@ margin_right = 210.0
 margin_bottom = 66.0
 custom_fonts/font = ExtResource( 2 )
 text = "Exit"
+
+[node name="Logo" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -388.0
+margin_right = 389.0
+margin_bottom = 382.0
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/FadeIn = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -10.0
 [connection signal="pressed" from="MarginContainer/Buttons/VBoxContainer/Start" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="MarginContainer/Buttons/VBoxContainer/Exit" to="." method="_on_Exit_pressed"]

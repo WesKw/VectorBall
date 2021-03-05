@@ -22,6 +22,9 @@ environment = SubResource( 2 )
 [node name="Log" parent="." instance=ExtResource( 2 )]
 transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, 390, 0, 0 )
 
+[node name="Log4" parent="." instance=ExtResource( 2 )]
+transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, 17, 0, -553 )
+
 [node name="Log2" parent="." instance=ExtResource( 2 )]
 transform = Transform( 20, 0, 0, 0, 20, 0, 0, 0, 20, -303, 0, 0 )
 

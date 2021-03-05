@@ -5,7 +5,7 @@ public class Main : Spatial
 {
 	private bool reset;
 	private string[] levelList = {"Beginner", "Split", "Downhill", "Uphill", "Sideways",
-								  "Elevator", "Button", "Rotation", "Airtime", "Test" };
+								  "Elevator", "Button", "Rotation", "Airtime", "Exam" };
 	[Export]
 	private int levelID = 1;
 	private PackedScene currentLevel;

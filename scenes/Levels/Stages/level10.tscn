@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Levels/BeginnerLight.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Levels/BeginnerWorldEnv.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/debug_material.tres" type="Material" id=4]
+[ext_resource path="res://scenes/Levels/StartPlatform.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Levels/RotatingBridge.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Levels/Elevator.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Levels/Level.cs" type="Script" id=9]
+
+[node name="level10" type="Spatial"]
+script = ExtResource( 9 )
+
+[node name="DeathBarrier" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -86, 0 )
+
+[node name="Geometry" type="Spatial" parent="."]
+
+[node name="Floor1" parent="Geometry" instance=ExtResource( 5 )]
+
+[node name="CSGPolygon" type="CSGPolygon" parent="Geometry"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, -1, -21 )
+use_collision = true
+polygon = PoolVector2Array( 0, -8, -2, 1, 1, 1, 10, -8 )
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CSGPolygon2" type="CSGPolygon" parent="Geometry"]
+transform = Transform( 2.10847e-08, -8.9407e-08, -1, -8.44439e-08, 1, -8.9407e-08, 1, 8.44439e-08, 2.10847e-08, 53, -1, -75 )
+use_collision = true
+polygon = PoolVector2Array( 10, -10, -3, -2, 1, -3, 10, -8 )
+depth = 6.0
+material = ExtResource( 4 )
+
+[node name="CSGBox" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, -36 )
+use_collision = true
+width = 6.0
+depth = 30.0
+material = ExtResource( 4 )
+
+[node name="CSGBox2" type="CSGBox" parent="Geometry"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, -10, -54 )
+use_collision = true
+width = 6.0
+depth = 30.0
+material = ExtResource( 4 )
+
+[node name="CSGBox3" type="CSGBox" parent="Geometry"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 38, -10, -48 )
+use_collision = true
+width = 6.0
+depth = 30.0
+material = ExtResource( 4 )
+
+[node name="CSGBox5" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 56, -10, -55 )
+use_collision = true
+width = 6.0
+depth = 20.0
+material = ExtResource( 4 )
+
+[node name="CSGBox4" type="CSGBox" parent="Geometry"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 38, -10, -58 )
+use_collision = true
+depth = 30.0
+material = ExtResource( 4 )
+
+[node name="CSGBox6" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 56, -4, -91 )
+use_collision = true
+width = 6.0
+depth = 26.0
+material = ExtResource( 4 )
+
+[node name="CSGBox7" type="CSGBox" parent="Geometry"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 46, -4, -107 )
+use_collision = true
+width = 6.0
+depth = 26.0
+material = ExtResource( 4 )
+
+[node name="CSGBox8" type="CSGBox" parent="Geometry"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -58, -31, -107 )
+use_collision = true
+width = 44.0
+height = 4.0
+depth = 36.0
+material = ExtResource( 4 )
+
+[node name="RotatingBridge" parent="Geometry" instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 20, -6, -107 )
+
+[node name="RotatingBridge2" parent="Geometry" instance=ExtResource( 6 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, -9, -107 )
+
+[node name="Elevator" parent="Geometry" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26, -9, -107 )
+
+[node name="Goal" parent="Geometry" instance=ExtResource( 8 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -70, -28, -107 )
+
+[node name="BeginnerWorldEnv" parent="." instance=ExtResource( 3 )]
+
+[node name="DirectionalLight" parent="." instance=ExtResource( 2 )]
