@@ -14,6 +14,5 @@ public abstract class SwitchEmitter : StaticBody
 	public virtual void Reset()
 	{
 		pressed = false;
-		
 	}
 }

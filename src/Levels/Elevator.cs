@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Elevator : KinematicBody
+public class Elevator : GameObject
 {
 	float time = 0;
 	[Export]
@@ -9,15 +9,13 @@ public class Elevator : KinematicBody
 	[Export]
 	float amp = 14;
 	Vector3 velocity = new Vector3(0, 0, 0);
-	Vector3 startPos;
-	Vector3 currPos;
-	Main main;
+	KinematicBody elevator;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		startPos = Translation;
-		main = GetNodeOrNull("../../..") as Main;
+		elevator = GetChild<KinematicBody>(0);
+		startPos = elevator.Translation;
 		currPos = startPos;
 	}
 	
@@ -32,14 +30,16 @@ public class Elevator : KinematicBody
 		time += delta;
 		//velocity.y = SetYVel(time);
 		currPos.y = Mathf.Lerp(currPos.y, SetYVel(time), .2f);
-		Translation = currPos;
+		elevator.Translation = currPos;
 		//MoveAndSlide(velocity, Vector3.Zero, false, 4, .785398f, true);
-		
-		if(main.Reset)
-		{
-			time = 0;
-			velocity.y = 0;
-			Translation = startPos;
-		}
+	}
+	
+	protected override void Reset()
+	{
+		GD.Print("Elevator Reset");
+		time = 0;
+		velocity.y = 0;
+		currPos = startPos;
+		elevator.Translation = currPos;
 	}
 }

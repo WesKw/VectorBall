@@ -3,12 +3,15 @@ using System;
 
 public class BridgeReceiver : AbstractSwitchReceiver
 {
-	Vector3 rot;
+	KinematicBody bridge;
+	Vector3 startingRot;
 	
 	public override void _Ready()
 	{
+		bridge = GetChild(0) as KinematicBody;
 		doAction = false;
-		rot = RotationDegrees;
+		startingRot = bridge.RotationDegrees;
+		rot = startingRot;
 	}
 	
 	public override void _PhysicsProcess(float delta)
@@ -16,7 +19,7 @@ public class BridgeReceiver : AbstractSwitchReceiver
 		if(doAction)
 		{
 			rot.y = Mathf.Lerp(rot.y, 0.0f, .2f);
-			RotationDegrees = rot;
+			bridge.RotationDegrees = rot;
 			if(rot.y >= 90.0f) doAction = false;
 		}
 	}
@@ -31,8 +34,11 @@ public class BridgeReceiver : AbstractSwitchReceiver
 		doAction = true;
 	}
 	
-	public override void Reset()
+	protected override void Reset()
 	{
-		
+		//GD.Print("Reset bridge?");
+		doAction = false;
+		rot = startingRot;
+		bridge.RotationDegrees = startingRot;
 	}
 }

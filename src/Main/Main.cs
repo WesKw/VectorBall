@@ -20,7 +20,8 @@ public class Main : Spatial
 	private AnimationPlayer UIAnimator;
 	
 	System.Timers.Timer levelTimer = new System.Timers.Timer(60000);
-	private System.Timers.Timer loadTimer = new System.Timers.Timer(5000);
+	System.Timers.Timer loadTimer = new System.Timers.Timer(5000);
+	System.Timers.Timer fallTimer = new System.Timers.Timer(3500);
 	
 	public bool Reset
 	{
@@ -37,6 +38,8 @@ public class Main : Spatial
 		loadTimer.Enabled = false;
 		loadTimer.Elapsed += LoadTimerElapsed;
 		//controller = GetNode("LevelController") as LevelController;
+		fallTimer.AutoReset = false;
+		fallTimer.Elapsed += FallTimerElapsed;
 		LoadPlayer();
 		LoadLevel(levelID);
 	}
@@ -105,6 +108,7 @@ public class Main : Spatial
 	private void on_fall_out()
 	{
 		Reset = true;
+		fallTimer.Enabled = true;
 		player.FallOut();
 	}
 	
@@ -118,5 +122,11 @@ public class Main : Spatial
 	private void on_level_ready()
 	{
 		UIAnimator.Play("FadeIn");
+	}
+	
+	private void FallTimerElapsed(System.Object source, System.Timers.ElapsedEventArgs e)
+	{
+		player.FallTimerElapsed();
+		level.EmitObjectManagerSignal();
 	}
 }

@@ -1,22 +1,30 @@
 using Godot;
 using System;
 
-public class RotatingBridge : KinematicBody
+public class RotatingBridge : GameObject
 {
 	[Export]
 	float speed = .05f;
 	float time = 0;
-	Vector3 rot;
+	KinematicBody bridge;
 	
 	public override void _Ready()
 	{
-		rot = RotationDegrees;
+		bridge = GetChild(0) as KinematicBody;
+		rot = bridge.RotationDegrees;
 	}
 	
 	public override void _PhysicsProcess(float delta)
 	{
 		time += delta;
 		rot.y += (float)Math.Sin(time);
-		RotationDegrees = rot;
+		bridge.RotationDegrees = rot;
+	}
+	
+	protected override void Reset()
+	{
+		GD.Print("Reset bridge");
+		rot = Vector3.Zero;
+		bridge.RotationDegrees = rot;
 	}
 }

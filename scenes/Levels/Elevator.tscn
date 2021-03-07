@@ -6,14 +6,15 @@
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 5, 1, 5 )
 
-[node name="Elevator" type="KinematicBody"]
+[node name="Elevator" type="Spatial"]
 script = ExtResource( 2 )
-amp = 22.0
 
-[node name="CSGBox" type="CSGBox" parent="."]
+[node name="ElevatorBody" type="KinematicBody" parent="."]
+
+[node name="CSGBox" type="CSGBox" parent="ElevatorBody"]
 width = 10.0
 depth = 10.0
 material = ExtResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="CollisionShape" type="CollisionShape" parent="ElevatorBody"]
 shape = SubResource( 1 )

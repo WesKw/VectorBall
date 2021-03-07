@@ -22,11 +22,6 @@ public class Level : Spatial
 		GetNode<Area>("Geometry/Goal/Area").Connect("body_entered", this, nameof(_on_Goal_entered));
 		objectM = GetNodeOrNull("ObjectManager") as ObjectManager;
 	}
-
-	public override void _PhysicsProcess(float delta)
-	{
-		
-	}
 	
 	private void _on_DeathArea_area_entered(object body)
 	{
@@ -35,8 +30,6 @@ public class Level : Spatial
 			GD.Print("Fall out!");
 			EmitSignal(nameof(fall_out));
 			//Object manager will only exist on stages with moving parts or objects
-			if(!(objectM is null))
-				objectM.EmitSignal("on_reset");
 		}
 	}
 	
@@ -46,6 +39,15 @@ public class Level : Spatial
 		{
 			GD.Print("Next level!");
 			EmitSignal(nameof(level_finished));
+		}
+	}
+	
+	public void EmitObjectManagerSignal()
+	{
+		if(!(objectM is null))
+		{
+			GD.Print("Send reset signal");
+			objectM.EmitSignal("on_reset");
 		}
 	}
 }

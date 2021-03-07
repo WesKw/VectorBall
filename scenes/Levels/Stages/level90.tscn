@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/spaceskybox.jpg" type="Texture" id=1]
 [ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/space_material.tres" type="Material" id=6]
 [ext_resource path="res://scenes/Levels/SpaceBackground.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Levels/ObjectManager.tscn" type="PackedScene" id=8]
 
 [sub_resource type="PanoramaSky" id=1]
 panorama = ExtResource( 1 )
@@ -79,3 +80,5 @@ shadow_enabled = true
 directional_shadow_max_distance = 200.0
 
 [node name="SpaceBackground" parent="." instance=ExtResource( 7 )]
+
+[node name="ObjectManager" parent="." instance=ExtResource( 8 )]

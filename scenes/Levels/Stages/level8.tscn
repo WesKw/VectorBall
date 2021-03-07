@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Levels/Level.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=2]
@@ -7,11 +7,8 @@
 [ext_resource path="res://scenes/Levels/StartPlatform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/debug_material.tres" type="Material" id=7]
-[ext_resource path="res://src/Levels/RotatingBridge.cs" type="Script" id=8]
 [ext_resource path="res://scenes/Levels/RotatingBridge.tscn" type="PackedScene" id=9]
-
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 5, 1, 13 )
+[ext_resource path="res://scenes/Levels/ObjectManager.tscn" type="PackedScene" id=10]
 
 [node name="level8" type="Spatial"]
 script = ExtResource( 1 )
@@ -47,17 +44,8 @@ material = ExtResource( 7 )
 [node name="RotatingBridge" parent="Geometry" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -62 )
 
-[node name="RotatingBridge2" type="KinematicBody" parent="Geometry"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, -116 )
-script = ExtResource( 8 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Geometry/RotatingBridge2"]
-shape = SubResource( 1 )
-
-[node name="CSGBox" type="CSGBox" parent="Geometry/RotatingBridge2"]
-width = 10.0
-depth = 26.0
-material = ExtResource( 7 )
+[node name="RotatingBridge2" parent="Geometry" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, -117 )
 
 [node name="DeathBarrier" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0 )
@@ -65,3 +53,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0 )
 [node name="BeginnerWorldEnv" parent="." instance=ExtResource( 3 )]
 
 [node name="DirectionalLight" parent="." instance=ExtResource( 4 )]
+
+[node name="ObjectManager" parent="." instance=ExtResource( 10 )]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Levels/Level.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/Levels/StartPlatform.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/debug_material.tres" type="Material" id=7]
+[ext_resource path="res://scenes/Levels/ObjectManager.tscn" type="PackedScene" id=8]
 
 [node name="level9" type="Spatial"]
 script = ExtResource( 1 )
@@ -79,3 +80,5 @@ material = ExtResource( 7 )
 [node name="BeginnerWorldEnv" parent="." instance=ExtResource( 3 )]
 
 [node name="DirectionalLight" parent="." instance=ExtResource( 4 )]
+
+[node name="ObjectManager" parent="." instance=ExtResource( 8 )]

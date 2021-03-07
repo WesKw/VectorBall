@@ -9,9 +9,10 @@ public class ObjectManager : Node
 	
 	private void FindResettableObjects(Spatial geometry)
 	{
-		foreach(GameObject x in geometry.GetChildren())
+		foreach(Node x in geometry.GetChildren())
 		{
-			
+			if((x is GameObject) || (x is SwitchEmitter))
+				Connect("on_reset", x, "Reset");
 		}
 	}
 	

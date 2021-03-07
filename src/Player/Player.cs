@@ -37,8 +37,6 @@ public class Player : Spatial
 	public override void _Ready()
 	{
 		//Set up timer
-		fallTimer.AutoReset = false;
-		fallTimer.Elapsed += FallTimerElapsed;
 		playerBody = GetNode("RigidBody") as PlayerBody;
 		playerBody.Translation = new Vector3(0, 5.0f, 0);
 		cam = GetNode("CameraPivot/Camera") as Camera;
@@ -114,7 +112,6 @@ public class Player : Spatial
 	{
 		inputAllowed = false;
 		GD.Print("Player has fallen");
-		fallTimer.Enabled = true;
 	}
 	
 	//When player reaches the goal
@@ -127,7 +124,7 @@ public class Player : Spatial
 	}
 	
 	//Call reset when timer is elapsed
-	private void FallTimerElapsed(System.Object source, System.Timers.ElapsedEventArgs e)
+	public void FallTimerElapsed()
 	{
 		if(lives < 1)
 		{
