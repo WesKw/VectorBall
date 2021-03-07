@@ -3,20 +3,24 @@ using System;
 
 public class Main : Spatial
 {
+	//An array that contains every level name
+	private string[] levelList = {  "Beginner", "Split", "Downhill", "Uphill", "Sideways",
+									"Elevator", "Button", "Rotation", "Airtime", "Exam" };
+									
 	private bool reset;
-	private string[] levelList = {"Beginner", "Split", "Downhill", "Uphill", "Sideways",
-								  "Elevator", "Button", "Rotation", "Airtime", "Exam" };
 	[Export]
 	private int levelID = 1;
+	
 	private PackedScene currentLevel;
 	private PackedScene playerScene;
 	private Spatial cam;
 	private Player player;
 	private Level level;
-	private System.Timers.Timer loadTimer = new System.Timers.Timer(5000);
 	private Control gameUI;
 	private AnimationPlayer UIAnimator;
-	//private LevelController controller;
+	
+	System.Timers.Timer levelTimer = new System.Timers.Timer(60000);
+	private System.Timers.Timer loadTimer = new System.Timers.Timer(5000);
 	
 	public bool Reset
 	{

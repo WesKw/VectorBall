@@ -1,0 +1,8 @@
+C:\Users\Webley\VectorBall\.mono\temp\bin\ExportDebug\Vector Ball.dll
+C:\Users\Webley\VectorBall\.mono\temp\bin\ExportDebug\Vector Ball.pdb
+C:\Users\Webley\VectorBall\.mono\temp\obj\ExportDebug\Vector Ball.csprojAssemblyReference.cache
+C:\Users\Webley\VectorBall\.mono\temp\obj\ExportDebug\Vector Ball.csproj.CoreCompileInputs.cache
+C:\Users\Webley\VectorBall\.mono\temp\obj\ExportDebug\Vector Ball.AssemblyInfoInputs.cache
+C:\Users\Webley\VectorBall\.mono\temp\obj\ExportDebug\Vector Ball.AssemblyInfo.cs
+C:\Users\Webley\VectorBall\.mono\temp\obj\ExportDebug\Vector Ball.dll
+C:\Users\Webley\VectorBall\.mono\temp\obj\ExportDebug\Vector Ball.pdb

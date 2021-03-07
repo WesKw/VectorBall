@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Levels/StartPlatform.tscn" type="PackedScene" id=2]
@@ -8,10 +8,12 @@
 [ext_resource path="res://scenes/Levels/PlaySwitch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/space_material.tres" type="Material" id=7]
 [ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Levels/ObjectManager.tscn" type="PackedScene" id=9]
 [ext_resource path="res://src/Levels/BridgeReceiver.cs" type="Script" id=10]
 [ext_resource path="res://src/Levels/Level.cs" type="Script" id=11]
+[ext_resource path="res://src/Levels/ObjectManager.cs" type="Script" id=12]
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=1]
 extents = Vector3( 4, 1, 18 )
 
 [node name="level7" type="Spatial"]
@@ -53,8 +55,11 @@ depth = 36.0
 material = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Geometry/KinematicBody"]
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="BeginnerWorldEnv" parent="." instance=ExtResource( 3 )]
 
 [node name="DirectionalLight" parent="." instance=ExtResource( 4 )]
+
+[node name="ObjectManager" parent="." instance=ExtResource( 9 )]
+script = ExtResource( 12 )

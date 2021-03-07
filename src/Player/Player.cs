@@ -3,14 +3,15 @@ using System;
 
 public class Player : Spatial
 {
-	private bool reset = false;
 	private const float GRAV_SCALE = 4.0f;
+	
+	//private bool reset = false;
 	private bool inputAllowed = true;
-	private bool grounded;
-	private static int lives = 3;
+	//private bool grounded;
+	private int lives = 3;
 	private float maxSpeed = .60f;
 	private float maxTilt = 31.0f;
-	private float maxVelocity = 120;
+	//private float maxVelocity = 120;
 	private float camSpeed = 2.0f;
 	private Camera cam;
 	private Spatial camPivot;
@@ -80,6 +81,8 @@ public class Player : Spatial
 			camRotation.x = Mathf.Lerp(camRotation.x, 0.0f, .3f);
 		
 		camPivot.RotationDegrees = camRotation;
+		//camPivot.RotationDegrees = cam.GlobalTransform.basis.z;
+		//cam.LookAt(Vector3.Up, playerBody.Translation);
 	}
 	
 	public override void _Process(float delta)
@@ -128,7 +131,6 @@ public class Player : Spatial
 	{
 		if(lives < 1)
 		{
-			Lives = 3;
 			GetTree().ChangeScene("res://scenes/Title/Title.tscn");
 		} else
 		{

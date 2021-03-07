@@ -30,28 +30,28 @@ material = ExtResource( 4 )
 [node name="Hill1" type="CSGPolygon" parent="Geometry"]
 transform = Transform( -1.98419e-09, 0, 1, 0, 1, 0, -1, 0, -1.98419e-09, 7, -1, -21 )
 use_collision = true
-polygon = PoolVector2Array( 0, 0, 0, 1, 1, 1, 9, -1 )
+polygon = PoolVector2Array( 0, -2, 0, 1, 9, -1, 9, -2 )
 depth = 14.0
 material = ExtResource( 4 )
 
 [node name="Hill2" type="CSGPolygon" parent="Geometry"]
 transform = Transform( -1.98419e-09, 0, 1, 0, 1, 0, -1, 0, -1.98419e-09, 7, -3, -30 )
 use_collision = true
-polygon = PoolVector2Array( 0, 0, 0, 1, 1, 1, 9, -2 )
+polygon = PoolVector2Array( 0, 0, 0, 1, 9, -2, 9, -3 )
 depth = 14.0
 material = ExtResource( 4 )
 
 [node name="Hill3" type="CSGPolygon" parent="Geometry"]
 transform = Transform( -1.98419e-09, 0, 1, 0, 1, 0, -1, 0, -1.98419e-09, 7, -6, -39 )
 use_collision = true
-polygon = PoolVector2Array( 0, 0, 0, 1, 1, 1, 9, -3 )
+polygon = PoolVector2Array( 0, 0, 0, 1, 9, -3, 9, -4 )
 depth = 14.0
 material = ExtResource( 4 )
 
 [node name="Hill4" type="CSGPolygon" parent="Geometry"]
 transform = Transform( -1.98419e-09, 0, 1, 0, 1, 0, -1, 0, -1.98419e-09, 7, -10, -48 )
 use_collision = true
-polygon = PoolVector2Array( 0, 0, 0, 1, 1, 1, 9, -7 )
+polygon = PoolVector2Array( 0, 0, 0, 1, 11, -8, 8, -8 )
 depth = 14.0
 material = ExtResource( 4 )
 

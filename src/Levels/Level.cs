@@ -12,8 +12,7 @@ public class Level : Spatial
 	//private Vector3 stageLocation;
 	//private Vector3 startLocation;
 	private RigidBody player;
-	//private KinematicBody stage;
-	//private CollisionShape DeathBarrier;
+	private ObjectManager objectM;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -21,6 +20,7 @@ public class Level : Spatial
 		GetNode<Area>("DeathBarrier/DeathArea").Connect("body_entered", this, nameof(_on_DeathArea_area_entered));
 		player = GetParent().GetNode("Player/RigidBody") as RigidBody;
 		GetNode<Area>("Geometry/Goal/Area").Connect("body_entered", this, nameof(_on_Goal_entered));
+		objectM = GetNodeOrNull("ObjectManager") as ObjectManager;
 	}
 
 	public override void _PhysicsProcess(float delta)
@@ -34,6 +34,9 @@ public class Level : Spatial
 		{
 			GD.Print("Fall out!");
 			EmitSignal(nameof(fall_out));
+			//Object manager will only exist on stages with moving parts or objects
+			if(!(objectM is null))
+				objectM.EmitSignal("on_reset");
 		}
 	}
 	
