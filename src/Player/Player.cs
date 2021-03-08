@@ -33,6 +33,12 @@ public class Player : Spatial
 		set { lives = value; }
 	}
 	
+	public Vector3 PlayerBodyTranslation
+	{
+		get { return playerBody.Translation; }
+		set { }
+	}
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

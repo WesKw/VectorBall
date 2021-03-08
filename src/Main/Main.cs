@@ -16,7 +16,7 @@ public class Main : Spatial
 	private Spatial cam;
 	private Player player;
 	private Level level;
-	private Control gameUI;
+	private GameUI gameUI;
 	private AnimationPlayer UIAnimator;
 	
 	System.Timers.Timer levelTimer = new System.Timers.Timer(60000);
@@ -32,7 +32,7 @@ public class Main : Spatial
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		gameUI = GetNode<Control>("GameUI");
+		gameUI = GetNode<GameUI>("GameUI");
 		UIAnimator = gameUI.GetNode("AnimationPlayer") as AnimationPlayer;
 		loadTimer.AutoReset = false;
 		loadTimer.Enabled = false;
@@ -42,6 +42,11 @@ public class Main : Spatial
 		fallTimer.Elapsed += FallTimerElapsed;
 		LoadPlayer();
 		LoadLevel(levelID);
+	}
+	
+	public override void _Process(float delta)
+	{
+		gameUI.UpdatePlayerTranslation(player.PlayerBodyTranslation);
 	}
 	
 	private void CheckConnections()
