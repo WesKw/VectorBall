@@ -17,18 +17,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0 )
 [node name="Geometry" type="Spatial" parent="."]
 
 [node name="Goal" parent="Geometry" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, -64 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29424, -64 )
 
 [node name="CSGCylinder" type="CSGCylinder" parent="Geometry"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.06074, -64 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.93926, -64 )
 operation = 1
 use_collision = true
 radius = 21.0
-height = 0.5
+height = 2.0
 material = ExtResource( 2 )
 
 [node name="CSGBox" type="CSGBox" parent="Geometry"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -34 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -34 )
 use_collision = true
 width = 10.0
 height = 0.65
@@ -36,16 +36,6 @@ depth = 26.0
 material = ExtResource( 2 )
 
 [node name="Floor1" parent="Geometry" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -7 )
-
-[node name="Railing3" type="CSGBox" parent="Geometry"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00277019, 2.39995, 6.75251 )
-operation = 1
-use_collision = true
-width = 10.0
-height = 1.0
-depth = 0.442061
-material = ExtResource( 2 )
 
 [node name="BeginnerWorldEnv" parent="." instance=ExtResource( 3 )]
 

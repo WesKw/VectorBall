@@ -4,11 +4,18 @@ using System;
 public class PlayerBody : RigidBody
 {
 	private bool reset;
+	private bool intro;
 	
 	public bool Reset
 	{
 		get { return reset; }
 		set { reset = value; }
+	}
+	
+	public bool Intro
+	{
+		get { return intro; }
+		set { intro = value; }
 	}
 	
 	public override void _IntegrateForces(PhysicsDirectBodyState state) 

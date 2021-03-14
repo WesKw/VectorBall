@@ -5,27 +5,33 @@ public class Player : Spatial
 {
 	private const float GRAV_SCALE = 4.0f;
 	
-	//private bool reset = false;
 	private bool inputAllowed = true;
 	//private bool grounded;
 	private int lives = 3;
-	private float maxSpeed = .60f;
-	private float maxTilt = 31.0f;
+	private const float maxSpeed = .60f;
+	private const float maxTilt = 31.0f;
 	//private float maxVelocity = 120;
 	private float camSpeed = 2.0f;
-	private Camera cam;
+	private ClippedCamera cam;
 	private Spatial camPivot;
 	//private Vector3 camTranslation;
 	private Vector3 camRotation;
 	private PlayerBody playerBody;
 	private Vector3 gravity = new Vector3(0, -1, 0);
 	private System.Timers.Timer fallTimer = new System.Timers.Timer(3500);
+	private AnimationPlayer animator;
 	
 	[Signal]
 	public delegate void on_reset();
 	
 	[Signal]
 	public delegate void game_over();
+	
+	[Signal]
+	public delegate void on_move(float camRot);
+	
+	[Signal]
+	public delegate void update_translation(Vector3 playerBodyTranslation);
 	
 	public int Lives
 	{
@@ -39,16 +45,28 @@ public class Player : Spatial
 		set { }
 	}
 	
+	private void BodyLock(bool state)
+	{
+		playerBody.AxisLockLinearX = state;
+		playerBody.AxisLockLinearY = state;
+		playerBody.AxisLockLinearZ = state;
+	}
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		//Set up timer
 		playerBody = GetNode("RigidBody") as PlayerBody;
 		playerBody.Translation = new Vector3(0, 5.0f, 0);
-		cam = GetNode("CameraPivot/Camera") as Camera;
+		cam = GetNode("CameraPivot/Camera") as ClippedCamera;
 		camPivot = GetNode("CameraPivot") as Spatial;
+		animator = GetNode("AnimationPlayer") as AnimationPlayer;
 		camRotation = new Vector3();
 		Connect("on_reset", GetNode<Main>(".."), nameof(on_reset));
+		Connect("on_move", GetNode<GameUI>("../GameUI"), "on_update_player");
+		Connect("update_translation", GetNode<GameUI>("../GameUI"), "UpdatePlayerTranslation");
+		animator.Connect("animation_finished", GetNode<Main>(".."), "PlayerAnimFinished");
+		Start();
 	}
 	
 	private void ProcessInput()
@@ -63,6 +81,8 @@ public class Player : Spatial
 		//Update server vector
 		PhysicsServer.AreaSetParam(GetViewport().FindWorld().Space, (PhysicsServer.AreaParameter)1, gravity);
 		//Update camera
+		EmitSignal(nameof(on_move), camPivot.RotationDegrees.y);
+		EmitSignal(nameof(update_translation), playerBody.Translation);
 		UpdateCamera(horiz, vert);
 	}
 	
@@ -116,8 +136,9 @@ public class Player : Spatial
 	//When player falls off the stage
 	public void FallOut()
 	{
+		//animator.PlaybackSpeed = 1.5f;
 		inputAllowed = false;
-		GD.Print("Player has fallen");
+		//GD.Print("Player has fallen");
 	}
 	
 	//When player reaches the goal
@@ -125,8 +146,9 @@ public class Player : Spatial
 	{
 		gravity = new Vector3(0.0f, 1.0f, 0.0f);
 		PhysicsServer.AreaSetParam(GetViewport().FindWorld().Space, (PhysicsServer.AreaParameter)1, gravity);
-		GD.Print("Goal!");
+		//GD.Print("Goal!");
 		inputAllowed = false;
+		//animator.PlaybackSpeed = 1;
 	}
 	
 	//Call reset when timer is elapsed
@@ -138,8 +160,28 @@ public class Player : Spatial
 		} else
 		{
 			Lives--;
-			GD.Print(Lives);
+			//GD.Print(Lives);
 			Reset();
 		}
+	}
+	
+	public void Start()
+	{
+		BodyLock(false);
+		playerBody.Show();
+		inputAllowed = true;
+	}
+	
+	public void PlayIntro(string anim)
+	{
+		BodyLock(true);
+		playerBody.Hide();
+		inputAllowed = false;
+		PlayAnimation(anim);
+	}
+	
+	private void PlayAnimation(string anim)
+	{
+		animator.Play(anim);
 	}
 }

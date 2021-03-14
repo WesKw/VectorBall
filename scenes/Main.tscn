@@ -5,6 +5,6 @@
 
 [node name="Main" type="Spatial"]
 script = ExtResource( 1 )
-levelID = 7
+levelID = 8
 
 [node name="GameUI" parent="." instance=ExtResource( 2 )]

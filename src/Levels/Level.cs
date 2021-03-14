@@ -19,7 +19,7 @@ public class Level : Spatial
 	{
 		GetNode<Area>("DeathBarrier/DeathArea").Connect("body_entered", this, nameof(_on_DeathArea_area_entered));
 		player = GetParent().GetNode("Player/RigidBody") as RigidBody;
-		GetNode<Area>("Geometry/Goal/Area").Connect("body_entered", this, nameof(_on_Goal_entered));
+		//GetNode<Area>("Geometry/Goal/Area").Connect("body_entered", this, nameof(_on_Goal_entered));
 		objectM = GetNodeOrNull("ObjectManager") as ObjectManager;
 	}
 	
@@ -33,13 +33,11 @@ public class Level : Spatial
 		}
 	}
 	
-	private void _on_Goal_entered(object body)
+	private void _on_Goal_entered(int levelModifier)
 	{
-		if(body is RigidBody)
-		{
-			GD.Print("Next level!");
-			EmitSignal(nameof(level_finished));
-		}
+		GD.Print(levelModifier);
+		GD.Print("Next level!");
+		EmitSignal(nameof(level_finished), levelModifier);
 	}
 	
 	public void EmitObjectManagerSignal()

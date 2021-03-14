@@ -1,9 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/Main/GameUI.cs" type="Script" id=1]
+[ext_resource path="res://assets/SerpentineDBol.ttf" type="DynamicFontData" id=2]
 
-[sub_resource type="Animation" id=1]
-resource_name = "FadeIn"
+[sub_resource type="DynamicFont" id=1]
+size = 64
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_char = 10
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=2]
 length = 0.35
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:modulate")
@@ -18,7 +25,7 @@ tracks/0/keys = {
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 0.35
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:modulate")
@@ -31,6 +38,56 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+tracks/0/type = "value"
+tracks/0/path = NodePath("MarginContainer/GOContainer/Label:anchor_left")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1.5, 2, 1 ),
+"update": 0,
+"values": [ -0.25, 0.5, 1.25 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/GOContainer/Label:anchor_right")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1.5, 2, 1 ),
+"update": 0,
+"values": [ -0.25, 0.5, 1.25 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("MarginContainer/GOContainer/Label2:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1.25, 0.5, 1 ),
+"update": 0,
+"values": [ 1.25, 0.5, -0.25 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("MarginContainer/GOContainer/Label2:anchor_left")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 0.5, 1 ),
+"update": 0,
+"values": [ 1.25, 0.5, -0.25 ]
 }
 
 [node name="GameUI" type="Control"]
@@ -83,20 +140,61 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -100.0
-margin_top = -100.0
+margin_left = -150.0
+margin_top = -150.0
 stretch = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Viewport" type="Viewport" parent="MarginContainer/CameraView/ViewportContainer"]
-size = Vector2( 100, 100 )
+size = Vector2( 150, 150 )
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="OHCamera" type="Camera" parent="MarginContainer/CameraView/ViewportContainer/Viewport"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 12, 0 )
+[node name="CamPivot" type="Spatial" parent="MarginContainer/CameraView/ViewportContainer/Viewport"]
+
+[node name="OHCamera" type="Camera" parent="MarginContainer/CameraView/ViewportContainer/Viewport/CamPivot"]
+transform = Transform( 1, 4.85542e-15, -2.98023e-08, 2.98023e-08, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 12, 0 )
+
+[node name="GOContainer" type="Control" parent="MarginContainer"]
+margin_right = 954.0
+margin_bottom = 550.0
+
+[node name="Label" type="Label" parent="MarginContainer/GOContainer"]
+anchor_left = -0.25
+anchor_top = 0.5
+anchor_right = -0.25
+anchor_bottom = 0.5
+margin_left = -84.5
+margin_top = -39.0
+margin_right = 84.5
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 1 )
+text = "GO!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="MarginContainer/GOContainer"]
+visible = false
+anchor_left = 1.25
+anchor_top = 0.5
+anchor_right = 1.25
+anchor_bottom = 0.5
+margin_left = -65.5
+margin_top = -39.0
+margin_right = 65.5
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 1 )
+text = "GO!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 modulate = Color( 0, 0, 0, 0 )
@@ -108,5 +206,8 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/FadeIn = SubResource( 1 )
-anims/FadeOut = SubResource( 2 )
+playback_speed = 0.8
+method_call_mode = 1
+anims/FadeIn = SubResource( 2 )
+anims/FadeOut = SubResource( 3 )
+anims/GO! = SubResource( 4 )

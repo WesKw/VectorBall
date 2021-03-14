@@ -17,11 +17,11 @@ public class Main : Spatial
 	private Player player;
 	private Level level;
 	private GameUI gameUI;
-	private AnimationPlayer UIAnimator;
 	
 	System.Timers.Timer levelTimer = new System.Timers.Timer(60000);
 	System.Timers.Timer loadTimer = new System.Timers.Timer(5000);
 	System.Timers.Timer fallTimer = new System.Timers.Timer(3500);
+	//System.Timers.Timer startTimer = new System.Timers.Timer(5000);
 	
 	public bool Reset
 	{
@@ -33,13 +33,14 @@ public class Main : Spatial
 	public override void _Ready()
 	{
 		gameUI = GetNode<GameUI>("GameUI");
-		UIAnimator = gameUI.GetNode("AnimationPlayer") as AnimationPlayer;
 		loadTimer.AutoReset = false;
 		loadTimer.Enabled = false;
 		loadTimer.Elapsed += LoadTimerElapsed;
 		//controller = GetNode("LevelController") as LevelController;
 		fallTimer.AutoReset = false;
 		fallTimer.Elapsed += FallTimerElapsed;
+		//startTimer.AutoReset = false;
+		//startTimer.Elapsed += StartTimerElapsed;
 		LoadPlayer();
 		LoadLevel(levelID);
 	}
@@ -70,6 +71,8 @@ public class Main : Spatial
 		level.Name = "level" + id.ToString();
 		AddChild(level);
 		CheckConnections();
+		player.PlayIntro("CameraSwirl");
+		//startTimer.Enabled = true;
 	}
 	
 	private void LoadPlayer()
@@ -84,17 +87,17 @@ public class Main : Spatial
 		//controller.PlayerCamPivot = cam;
 	}
 	
-	private void on_level_finished()
+	private void on_level_finished(int levelModifier)
 	{
 		player.Goal();
 		GD.Print("level finished!");
-		levelID++;
+		levelID += levelModifier;
 		loadTimer.Enabled = true;
 	}
 	
 	private void LoadTimerElapsed(System.Object source, System.Timers.ElapsedEventArgs e)
 	{
-		UIAnimator.Play("FadeOut");
+		gameUI.PlayAnimation("FadeOut");
 		if(levelID > levelList.Length)
 		{
 			GetTree().ChangeScene("res://scenes/Title/Title.tscn");
@@ -104,9 +107,9 @@ public class Main : Spatial
 			GD.Print("Load next level now");
 			//Remove current level
 			level.QueueFree();
-			LoadLevel(levelID);
 			player.Reset();
-			UIAnimator.Play("FadeIn");
+			LoadLevel(levelID);
+			gameUI.PlayAnimation("FadeIn");
 		}
 	}
 	
@@ -119,19 +122,31 @@ public class Main : Spatial
 	
 	private void on_reset()
 	{
-		UIAnimator.Play("FadeOut");;
+		gameUI.PlayAnimation("FadeOut");;
 		Reset = false;
-		UIAnimator.Play("FadeIn");
+		gameUI.PlayAnimation("FadeIn");
+		player.PlayIntro("CameraSwirl");
+		//startTimer.Enabled = true;
 	}
 	
 	private void on_level_ready()
 	{
-		UIAnimator.Play("FadeIn");
+		gameUI.Reset();
+		gameUI.PlayAnimation("FadeIn");
 	}
 	
 	private void FallTimerElapsed(System.Object source, System.Timers.ElapsedEventArgs e)
 	{
 		player.FallTimerElapsed();
 		level.EmitObjectManagerSignal();
+	}
+	
+	private void PlayerAnimFinished(string animName)
+	{
+		if(animName == "CameraSwirl")
+		{
+			gameUI.PlayAnimation("GO!");
+			player.Start();
+		}
 	}
 }
