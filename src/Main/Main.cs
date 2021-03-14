@@ -5,11 +5,13 @@ public class Main : Spatial
 {
 	//An array that contains every level name
 	private string[] levelList = {  "Beginner", "Split", "Downhill", "Uphill", "Sideways",
-									"Elevator", "Button", "Rotation", "Airtime", "Exam" };
+									"Elevator", "Button", "Rotation", "Airtime", "Exam", 
+									"Pitstop"};
 									
 	private bool reset;
 	[Export]
 	private int levelID = 1;
+	private int currentTime = 60;
 	
 	private PackedScene currentLevel;
 	private PackedScene playerScene;
@@ -18,9 +20,9 @@ public class Main : Spatial
 	private Level level;
 	private GameUI gameUI;
 	
-	System.Timers.Timer levelTimer = new System.Timers.Timer(60000);
 	System.Timers.Timer loadTimer = new System.Timers.Timer(5000);
 	System.Timers.Timer fallTimer = new System.Timers.Timer(3500);
+	System.Timers.Timer levelTimer;
 	//System.Timers.Timer startTimer = new System.Timers.Timer(5000);
 	
 	public bool Reset
@@ -72,6 +74,7 @@ public class Main : Spatial
 		AddChild(level);
 		CheckConnections();
 		player.PlayIntro("CameraSwirl");
+		gameUI.UpdateLevelName(levelList[id-1]);
 		//startTimer.Enabled = true;
 	}
 	
@@ -89,8 +92,10 @@ public class Main : Spatial
 	
 	private void on_level_finished(int levelModifier)
 	{
+		levelTimer.Stop();
 		player.Goal();
-		GD.Print("level finished!");
+		//GD.Print("level finished!");
+		UpdateUIScore(currentTime * 1000);
 		levelID += levelModifier;
 		loadTimer.Enabled = true;
 	}
@@ -115,6 +120,7 @@ public class Main : Spatial
 	
 	private void on_fall_out()
 	{
+		levelTimer.Stop();
 		Reset = true;
 		fallTimer.Enabled = true;
 		player.FallOut();
@@ -124,9 +130,10 @@ public class Main : Spatial
 	{
 		gameUI.PlayAnimation("FadeOut");;
 		Reset = false;
+		currentTime = 60;
+		gameUI.UpdateTimer(currentTime);
 		gameUI.PlayAnimation("FadeIn");
 		player.PlayIntro("CameraSwirl");
-		//startTimer.Enabled = true;
 	}
 	
 	private void on_level_ready()
@@ -147,6 +154,32 @@ public class Main : Spatial
 		{
 			gameUI.PlayAnimation("GO!");
 			player.Start();
+			levelTimer = new System.Timers.Timer(60000);
+			levelTimer.Elapsed += UpdateUITimer;
+			levelTimer.Interval = 1000;
+			levelTimer.AutoReset = false;
+			levelTimer.Start();
+		}
+	}
+	
+	private void UpdateUIScore(int val)
+	{
+		gameUI.UpdateScore(val);
+	}
+	
+	private void UpdateUITimer(System.Object source, System.Timers.ElapsedEventArgs e)
+	{
+		currentTime -= 1;
+		if(currentTime < 0)
+		{
+			//GameUI.PlayAnimation("TimeOver");
+			player.BodyLock(true);
+			on_fall_out();
+		}
+		else
+		{
+			levelTimer.Start();
+			gameUI.UpdateTimer(currentTime);
 		}
 	}
 }

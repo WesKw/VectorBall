@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://src/Player/PlayerBody.cs" type="Script" id=2]
@@ -25,8 +25,10 @@ depth_flip_binormal = false
 [sub_resource type="SphereShape" id=3]
 radius = 0.499409
 
-[sub_resource type="Animation" id=4]
-resource_name = "CameraSwirl"
+[sub_resource type="SphereShape" id=4]
+radius = 0.5
+
+[sub_resource type="Animation" id=5]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("CameraPivot:translation")
@@ -66,6 +68,11 @@ material = SubResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
 shape = SubResource( 3 )
 
+[node name="Area" type="Area" parent="RigidBody"]
+
+[node name="CollisionShape" type="CollisionShape" parent="RigidBody/Area"]
+shape = SubResource( 4 )
+
 [node name="CameraPivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0 )
 
@@ -76,4 +83,5 @@ far = 1000.0
 clip_to_bodies = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/CameraSwirl = SubResource( 4 )
+anims/CameraSwirl = SubResource( 5 )
+[connection signal="area_entered" from="RigidBody/Area" to="." method="_on_Area_area_entered"]

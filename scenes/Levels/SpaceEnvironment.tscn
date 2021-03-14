@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/space4.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Levels/SpaceBackground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Levels/SpaceLight.tscn" type="PackedScene" id=3]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 1 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+
+[node name="SpaceEnvironment" type="WorldEnvironment"]
+environment = SubResource( 2 )
+
+[node name="SpaceBackground" parent="." instance=ExtResource( 2 )]
+
+[node name="DirectionalLight" parent="." instance=ExtResource( 3 )]

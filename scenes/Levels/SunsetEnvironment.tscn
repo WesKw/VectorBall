@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/3840x2160_sunset-dark-twilight-sky-clouds.jpg" type="Texture" id=1]
+
+[sub_resource type="PanoramaSky" id=1]
+panorama = ExtResource( 1 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_sky_custom_fov = 90.0
+background_sky_orientation = Basis( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1 )
+background_energy = 2.37
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource( 2 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 59, 100 )
+directional_shadow_max_distance = 500.0

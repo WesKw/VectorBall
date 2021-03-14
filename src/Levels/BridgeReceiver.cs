@@ -24,15 +24,9 @@ public class BridgeReceiver : AbstractSwitchReceiver
 		}
 	}
 	
-	protected override void SwitchAction()
-	{
-		
-	}
+	protected override void SwitchAction() { }
 	
-	public override void on_switch_pressed()
-	{
-		doAction = true;
-	}
+	public override void on_switch_pressed() => doAction = true;
 	
 	protected override void Reset()
 	{

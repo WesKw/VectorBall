@@ -8,6 +8,7 @@ public class Player : Spatial
 	private bool inputAllowed = true;
 	//private bool grounded;
 	private int lives = 3;
+	private int collected = 0;
 	private const float maxSpeed = .60f;
 	private const float maxTilt = 31.0f;
 	//private float maxVelocity = 120;
@@ -20,6 +21,9 @@ public class Player : Spatial
 	private Vector3 gravity = new Vector3(0, -1, 0);
 	private System.Timers.Timer fallTimer = new System.Timers.Timer(3500);
 	private AnimationPlayer animator;
+	
+	[Signal]
+	public delegate void on_collect(int amount);
 	
 	[Signal]
 	public delegate void on_reset();
@@ -45,7 +49,7 @@ public class Player : Spatial
 		set { }
 	}
 	
-	private void BodyLock(bool state)
+	public void BodyLock(bool state)
 	{
 		playerBody.AxisLockLinearX = state;
 		playerBody.AxisLockLinearY = state;
@@ -65,6 +69,7 @@ public class Player : Spatial
 		Connect("on_reset", GetNode<Main>(".."), nameof(on_reset));
 		Connect("on_move", GetNode<GameUI>("../GameUI"), "on_update_player");
 		Connect("update_translation", GetNode<GameUI>("../GameUI"), "UpdatePlayerTranslation");
+		Connect("on_collect", GetNode<Main>(".."), "UpdateUIScore");
 		animator.Connect("animation_finished", GetNode<Main>(".."), "PlayerAnimFinished");
 		Start();
 	}
@@ -183,5 +188,14 @@ public class Player : Spatial
 	private void PlayAnimation(string anim)
 	{
 		animator.Play(anim);
+	}
+	
+	private void _on_Area_area_entered(Area area)
+	{
+		if(area is Collectable)
+		{
+			collected++;
+			EmitSignal(nameof(on_collect), 50);
+		}
 	}
 }

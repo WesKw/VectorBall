@@ -19,26 +19,16 @@ public class Level : Spatial
 	{
 		GetNode<Area>("DeathBarrier/DeathArea").Connect("body_entered", this, nameof(_on_DeathArea_area_entered));
 		player = GetParent().GetNode("Player/RigidBody") as RigidBody;
-		//GetNode<Area>("Geometry/Goal/Area").Connect("body_entered", this, nameof(_on_Goal_entered));
 		objectM = GetNodeOrNull("ObjectManager") as ObjectManager;
+		Connect("tree_exiting", this, "on_despawn");
 	}
 	
 	private void _on_DeathArea_area_entered(object body)
 	{
-		if(body is PlayerBody)
-		{
-			GD.Print("Fall out!");
-			EmitSignal(nameof(fall_out));
-			//Object manager will only exist on stages with moving parts or objects
-		}
+		if(body is PlayerBody) EmitSignal(nameof(fall_out));
 	}
 	
-	private void _on_Goal_entered(int levelModifier)
-	{
-		GD.Print(levelModifier);
-		GD.Print("Next level!");
-		EmitSignal(nameof(level_finished), levelModifier);
-	}
+	private void _on_Goal_entered(int levelModifier) => EmitSignal(nameof(level_finished), levelModifier);
 	
 	public void EmitObjectManagerSignal()
 	{
@@ -48,4 +38,6 @@ public class Level : Spatial
 			objectM.EmitSignal("on_reset");
 		}
 	}
+	
+	
 }

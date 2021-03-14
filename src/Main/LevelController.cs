@@ -44,6 +44,7 @@ public class LevelController : Node
 	
 	public override void _Process(float delta)
 	{
+		/*
 		if(inputAllowed)
 		{
 			float horiz = Input.GetActionStrength("tilt_right") - Input.GetActionStrength("tilt_left");
@@ -53,6 +54,7 @@ public class LevelController : Node
 			gravity.z = vert * maxTilt;
 			PhysicsServer.AreaSetParam(GetViewport().FindWorld().Space, (PhysicsServer.AreaParameter)1, gravity);
 		}
+		*/
 	}
 
 	public override void _PhysicsProcess(float delta)

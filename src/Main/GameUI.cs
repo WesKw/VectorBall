@@ -6,6 +6,7 @@ public class GameUI : Control
 	bool allowZoom = false;
 	int zoomLevel = 2;
 	float[] zooms = {36f, 24f, 12f};
+	Label timer;
 	Spatial pivot;
 	Vector3 updatedTranslation;
 	Vector3 camTranslation;
@@ -37,6 +38,7 @@ public class GameUI : Control
 		pivot = GetNode("MarginContainer/CameraView/ViewportContainer/Viewport/CamPivot") as Spatial;
 		overHeadCam = GetNode("MarginContainer/CameraView/ViewportContainer/Viewport/CamPivot/OHCamera") as Camera;
 		animator = GetNode("AnimationPlayer") as AnimationPlayer;
+		timer = GetNode("MarginContainer/TimerControl/Timer") as Label;
 		camTranslation = overHeadCam.Translation;
 		camRotation = pivot.RotationDegrees;
 	}
@@ -84,5 +86,23 @@ public class GameUI : Control
 		Vector3 camRot = overHeadCam.RotationDegrees;
 		camRot.y = camPivot;
 		overHeadCam.RotationDegrees = camRot;
+	}
+	
+	public void UpdateScore(int amount)
+	{
+		
+	}
+	
+	public void UpdateTimer(int amount)
+	{
+		timer.Text = amount.ToString();
+	}
+	
+	public void UpdateLevelName(string levelName)
+	{
+		GetNode<Label>("MarginContainer/WorldText/LevelName").Text = levelName;
+		animator.AssignedAnimation = "ShowLevel";
+		animator.Seek(0);
+		animator.Play("ShowLevel");
 	}
 }
