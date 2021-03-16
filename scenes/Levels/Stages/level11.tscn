@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Levels/ObjectManager.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/advanced.tres" type="Material" id=5]
 [ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/Levels/Level.cs" type="Script" id=7]
+[ext_resource path="res://scenes/Levels/Collectable.tscn" type="PackedScene" id=8]
 
 [node name="level11" type="Spatial"]
 script = ExtResource( 7 )
@@ -21,12 +22,72 @@ material = ExtResource( 5 )
 
 [node name="CSGBox" type="CSGBox" parent="Geometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -48 )
+use_collision = true
 width = 54.0
 depth = 54.0
 material = ExtResource( 5 )
 
 [node name="Goal" parent="Geometry" instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -68 )
+
+[node name="Collectables" type="Spatial" parent="Geometry"]
+
+[node name="Collectable" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -48 )
+
+[node name="Collectable4" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -48 )
+
+[node name="Collectable5" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, -48 )
+
+[node name="Collectable6" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -48 )
+
+[node name="Collectable7" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -48 )
+
+[node name="Collectable8" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -41 )
+
+[node name="Collectable9" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -55 )
+
+[node name="Collectable10" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -55 )
+
+[node name="Collectable11" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -41 )
+
+[node name="Collectable12" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -41 )
+
+[node name="Collectable13" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -55 )
+
+[node name="Collectable14" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -72 )
+
+[node name="Collectable15" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -34 )
+
+[node name="Collectable16" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, -38 )
+
+[node name="Collectable17" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, -38 )
+
+[node name="Collectable18" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, -34 )
+
+[node name="Collectable19" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -34 )
+
+[node name="Collectable2" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -48 )
+
+[node name="Collectable3" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -48 )
 
 [node name="ObjectManager" parent="." instance=ExtResource( 2 )]
 

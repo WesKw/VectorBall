@@ -1,0 +1,108 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Levels/SunsetEnvironment.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Levels/Level.cs" type="Script" id=3]
+[ext_resource path="res://scenes/Levels/StartPlatform.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/advanced.tres" type="Material" id=5]
+[ext_resource path="res://assets/MetalBar.tres" type="Material" id=6]
+[ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Levels/GreenGoal.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Levels/Collectable.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Levels/ObjectManager.tscn" type="PackedScene" id=10]
+
+[node name="level12" type="Spatial"]
+script = ExtResource( 3 )
+
+[node name="Geometry" type="Spatial" parent="."]
+
+[node name="Floor1" parent="Geometry" instance=ExtResource( 4 )]
+material = ExtResource( 5 )
+
+[node name="CSGBox" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -39 )
+use_collision = true
+width = 32.0
+depth = 32.0
+material = ExtResource( 5 )
+
+[node name="CSGBox2" type="CSGBox" parent="Geometry"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -41, -4, -39 )
+use_collision = true
+width = 12.0
+depth = 50.0
+material = ExtResource( 5 )
+
+[node name="CSGBox3" type="CSGBox" parent="Geometry"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -60, -4, -70 )
+use_collision = true
+width = 12.0
+depth = 50.0
+material = ExtResource( 5 )
+
+[node name="CSGBox4" type="CSGBox" parent="Geometry"]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -36, -4, -101 )
+use_collision = true
+width = 12.0
+depth = 52.0
+material = ExtResource( 5 )
+
+[node name="CSGBox5" type="CSGBox" parent="Geometry"]
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 1, -32, -101 )
+use_collision = true
+width = 24.0
+depth = 24.0
+material = ExtResource( 5 )
+
+[node name="CSGTorus" type="CSGTorus" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 0.5, 0, 0, 0, 1, 1, -4, -101 )
+use_collision = true
+inner_radius = 9.0
+outer_radius = 16.0
+sides = 19
+material = ExtResource( 5 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -12, -101 )
+use_collision = true
+radius = 0.25
+height = 38.0
+sides = 18
+material = ExtResource( 6 )
+
+[node name="CSGCylinder2" type="CSGCylinder" parent="Geometry"]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 24, -41, -101 )
+use_collision = true
+radius = 0.25
+height = 28.0
+sides = 18
+material = ExtResource( 6 )
+
+[node name="Goal" parent="Geometry" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1, -27, -101 )
+
+[node name="GreenGoal" parent="Geometry" instance=ExtResource( 8 )]
+transform = Transform( 0.707107, 3.09086e-08, 0.707107, 0.707107, -3.09086e-08, -0.707107, 0, 1, -4.37114e-08, 33, -50, -101 )
+
+[node name="Collectables" type="Spatial" parent="Geometry"]
+
+[node name="Collectable" parent="Geometry/Collectables" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -2, -101 )
+
+[node name="Collectable2" parent="Geometry/Collectables" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -30, -101 )
+
+[node name="Collectable3" parent="Geometry/Collectables" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -30, -106 )
+
+[node name="Collectable4" parent="Geometry/Collectables" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -30, -96 )
+
+[node name="DeathBarrier" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -104, 0 )
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 2 )]
+
+[node name="ObjectManager" parent="." instance=ExtResource( 10 )]
+
+[editable path="Geometry/Floor1"]

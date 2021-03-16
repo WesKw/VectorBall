@@ -6,7 +6,7 @@
 
 [sub_resource type="PhysicsMaterial" id=1]
 rough = true
-bounce = 0.45
+bounce = 0.5
 
 [sub_resource type="SpatialMaterial" id=2]
 flags_transparent = true
@@ -32,15 +32,27 @@ radius = 0.5
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("CameraPivot:translation")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 5 ),
-"transitions": PoolRealArray( 0.25, 2.37841 ),
+"times": PoolRealArray( 0, 2.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 2.37841 ),
 "update": 0,
-"values": [ Vector3( 0, 20, 0 ), Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 30, 20, -60 ), Vector3( 45, 10, -30 ), Vector3( 0, 1.5, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CameraPivot/Camera:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 2, 1 ),
+"update": 0,
+"values": [ Vector3( -20, 135, 0 ), Vector3( -9.99999, 0, 0 ) ]
 }
 
 [node name="Player" type="Spatial"]
@@ -74,10 +86,10 @@ shape = SubResource( 3 )
 shape = SubResource( 4 )
 
 [node name="CameraPivot" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 20, -60 )
 
 [node name="Camera" type="ClippedCamera" parent="CameraPivot"]
-transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0.8, 1.75 )
+transform = Transform( -0.707107, -0.241845, 0.664463, 0, 0.939693, 0.34202, -0.707107, 0.241845, -0.664463, 0, 0.8, 1.75 )
 fov = 90.0
 far = 1000.0
 clip_to_bodies = false

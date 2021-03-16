@@ -5,6 +5,7 @@ public class PlayerBody : RigidBody
 {
 	private bool reset;
 	private bool intro;
+	private Vector3 startPos = new Vector3(0, 2.0f, 0);
 	
 	public bool Reset
 	{
@@ -25,9 +26,9 @@ public class PlayerBody : RigidBody
 			Transform t = state.Transform;
 			state.LinearVelocity *= 0;
 			state.AngularVelocity *= 0;
-			t.origin.y = 5.0f;
-			t.origin.x = 0;
-			t.origin.z = 0;
+			t.origin.y = startPos.y;
+			t.origin.x = startPos.x;
+			t.origin.z = startPos.z;
 			state.Transform = t;
 			Reset = false; 
 		}

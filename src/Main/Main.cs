@@ -6,13 +6,14 @@ public class Main : Spatial
 	//An array that contains every level name
 	private string[] levelList = {  "Beginner", "Split", "Downhill", "Uphill", "Sideways",
 									"Elevator", "Button", "Rotation", "Airtime", "Exam", 
-									"Pitstop"};
+									"Pitstop", "Hole-in-one" };
 									
 	private bool reset;
 	[Export]
 	private int levelID = 1;
 	private int currentTime = 60;
 	
+	//private LevelController controller;
 	private PackedScene currentLevel;
 	private PackedScene playerScene;
 	private Spatial cam;
@@ -34,6 +35,7 @@ public class Main : Spatial
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		//controller = GetNode("LevelController") as LevelController;
 		gameUI = GetNode<GameUI>("GameUI");
 		loadTimer.AutoReset = false;
 		loadTimer.Enabled = false;
@@ -76,6 +78,7 @@ public class Main : Spatial
 		player.PlayIntro("CameraSwirl");
 		gameUI.UpdateLevelName(levelList[id-1]);
 		//startTimer.Enabled = true;
+		//controller.CurrentLevel = level.GetNode("Geometry") as Spatial;
 	}
 	
 	private void LoadPlayer()
@@ -88,6 +91,7 @@ public class Main : Spatial
 		AddChild(player);
 		cam = player.GetNode("CameraPivot") as Spatial;
 		//controller.PlayerCamPivot = cam;
+		//controller.PivotPoint = player.GetNode<PlayerBody>("RigidBody");
 	}
 	
 	private void on_level_finished(int levelModifier)

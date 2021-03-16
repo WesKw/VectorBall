@@ -1,14 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/metaltextures03-preview.jpg" type="Texture" id=1]
 [ext_resource path="res://src/Levels/SpaceBackground.cs" type="Script" id=2]
-[ext_resource path="res://assets/metaltext1.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/MetalBar.tres" type="Material" id=3]
 
 [sub_resource type="SpatialMaterial" id=1]
-metallic = 1.0
-metallic_texture = ExtResource( 3 )
-
-[sub_resource type="SpatialMaterial" id=2]
 metallic = 1.0
 metallic_texture = ExtResource( 1 )
 
@@ -21,7 +17,7 @@ inner_radius = 8.0
 outer_radius = 9.0
 sides = 60
 ring_sides = 40
-material = SubResource( 1 )
+material = ExtResource( 3 )
 
 [node name="Ring2" type="CSGTorus" parent="."]
 transform = Transform( 50, 0, 0, 0, -35.3553, 35.3553, 0, -35.3553, -35.3553, 0, 0, 0 )
@@ -29,4 +25,4 @@ inner_radius = 10.0
 outer_radius = 11.0
 sides = 60
 ring_sides = 40
-material = SubResource( 2 )
+material = SubResource( 1 )

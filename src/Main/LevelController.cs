@@ -5,9 +5,9 @@ public class LevelController : Node
 {
 	private bool inputAllowed = true;
 	//private float speed = .5f;
-	private float maxTilt = 2.5f;
+	private float maxTilt = .25f;
 	private Spatial currentLevel = null;
-	private Spatial pivotPoint;
+	private PlayerBody pivotPoint;
 	private Spatial playerCamPivot = null;
 	//private Vector3 tilt;
 	private Vector3 gravity = new Vector3(0, -1, 0);
@@ -24,7 +24,7 @@ public class LevelController : Node
 		set { inputAllowed = value; }
 	}
 	
-	public Spatial PivotPoint
+	public PlayerBody PivotPoint
 	{
 		get { return pivotPoint; }
 		set { pivotPoint = value; }
@@ -49,10 +49,10 @@ public class LevelController : Node
 		{
 			float horiz = Input.GetActionStrength("tilt_right") - Input.GetActionStrength("tilt_left");
 			float vert = Input.GetActionStrength("tilt_up") - Input.GetActionStrength("tilt_down");
-			gravity.x = horiz * maxTilt;
-			gravity.y = -1;
-			gravity.z = vert * maxTilt;
-			PhysicsServer.AreaSetParam(GetViewport().FindWorld().Space, (PhysicsServer.AreaParameter)1, gravity);
+			gravity = ( playerCamPivot.GlobalTransform.basis.z * vert*maxTilt )
+				 + ( playerCamPivot.GlobalTransform.basis.x * horiz*maxTilt );
+			//PhysicsServer.AreaSetParam(GetViewport().FindWorld().Space, (PhysicsServer.AreaParameter)1, gravity);
+			TiltLevel(currentLevel, pivotPoint, gravity, maxTilt);
 		}
 		*/
 	}
@@ -65,7 +65,7 @@ public class LevelController : Node
 	//Algorithm for rotating around pivot
 	//Thanks to path2963 for this
 	//Translated to C# from gdscript
-	private void TiltLevel(Spatial geometry, Spatial point, Vector3 axis, float angle)
+	private void TiltLevel(Spatial geometry, PlayerBody point, Vector3 axis, float angle)
 	{
 		float rot;
 		

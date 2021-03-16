@@ -19,6 +19,7 @@ public class Player : Spatial
 	private Vector3 camRotation;
 	private PlayerBody playerBody;
 	private Vector3 gravity = new Vector3(0, -1, 0);
+	private Vector3 startPos = new Vector3(0, 2.0f, 0);
 	private System.Timers.Timer fallTimer = new System.Timers.Timer(3500);
 	private AnimationPlayer animator;
 	
@@ -61,7 +62,7 @@ public class Player : Spatial
 	{
 		//Set up timer
 		playerBody = GetNode("RigidBody") as PlayerBody;
-		playerBody.Translation = new Vector3(0, 5.0f, 0);
+		playerBody.Translation = startPos;
 		cam = GetNode("CameraPivot/Camera") as ClippedCamera;
 		camPivot = GetNode("CameraPivot") as Spatial;
 		animator = GetNode("AnimationPlayer") as AnimationPlayer;
@@ -195,6 +196,11 @@ public class Player : Spatial
 		if(area is Collectable)
 		{
 			collected++;
+			if(collected > 100)
+			{
+				lives++;
+				collected = 1;
+			}
 			EmitSignal(nameof(on_collect), 50);
 		}
 	}

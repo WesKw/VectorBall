@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Levels/Level.cs" type="Script" id=1]
 [ext_resource path="res://assets/debug_material.tres" type="Material" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Levels/StartPlatform.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/Levels/BeginnerLight.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Levels/Collectable.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/Levels/WorldTilt.cs" type="Script" id=9]
 
 [node name="level1" type="Spatial"]
 script = ExtResource( 1 )
@@ -37,6 +39,18 @@ material = ExtResource( 2 )
 
 [node name="Floor1" parent="Geometry" instance=ExtResource( 6 )]
 
+[node name="Collectables" type="Spatial" parent="Geometry"]
+
+[node name="Collectable" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1, -64 )
+
+[node name="Collectable2" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 1, -64 )
+
+[node name="Collectable3" parent="Geometry/Collectables" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -79 )
+
 [node name="BeginnerWorldEnv" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 9 )
 
 [node name="DirectionalLight" parent="." instance=ExtResource( 7 )]
