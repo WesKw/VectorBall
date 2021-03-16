@@ -5,7 +5,7 @@ public class PlayerBody : RigidBody
 {
 	private bool reset;
 	private bool intro;
-	private Vector3 startPos = new Vector3(0, 2.0f, 0);
+	private Vector3 startPos = new Vector3(0, 3.0f, 0);
 	
 	public bool Reset
 	{

@@ -157,7 +157,7 @@ public class Main : Spatial
 		if(animName == "CameraSwirl")
 		{
 			gameUI.PlayAnimation("GO!");
-			player.Start();
+			//player.Start();
 			levelTimer = new System.Timers.Timer(60000);
 			levelTimer.Elapsed += UpdateUITimer;
 			levelTimer.Interval = 1000;

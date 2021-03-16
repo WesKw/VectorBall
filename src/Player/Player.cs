@@ -19,7 +19,7 @@ public class Player : Spatial
 	private Vector3 camRotation;
 	private PlayerBody playerBody;
 	private Vector3 gravity = new Vector3(0, -1, 0);
-	private Vector3 startPos = new Vector3(0, 2.0f, 0);
+	private Vector3 startPos = new Vector3(0, 3.0f, 0);
 	private System.Timers.Timer fallTimer = new System.Timers.Timer(3500);
 	private AnimationPlayer animator;
 	
@@ -55,6 +55,9 @@ public class Player : Spatial
 		playerBody.AxisLockLinearX = state;
 		playerBody.AxisLockLinearY = state;
 		playerBody.AxisLockLinearZ = state;
+		playerBody.AxisLockAngularX = state;
+		playerBody.AxisLockAngularY = state;
+		playerBody.AxisLockAngularZ = state;
 	}
 	
 	// Called when the node enters the scene tree for the first time.
@@ -72,6 +75,7 @@ public class Player : Spatial
 		Connect("update_translation", GetNode<GameUI>("../GameUI"), "UpdatePlayerTranslation");
 		Connect("on_collect", GetNode<Main>(".."), "UpdateUIScore");
 		animator.Connect("animation_finished", GetNode<Main>(".."), "PlayerAnimFinished");
+		animator.Connect("animation_finished", this, "IntroFinished");
 		Start();
 	}
 	
@@ -173,7 +177,7 @@ public class Player : Spatial
 	
 	public void Start()
 	{
-		BodyLock(false);
+		//BodyLock(false);
 		playerBody.Show();
 		inputAllowed = true;
 	}
@@ -189,6 +193,11 @@ public class Player : Spatial
 	private void PlayAnimation(string anim)
 	{
 		animator.Play(anim);
+	}
+	
+	private void IntroFinished(string anim)
+	{
+		if(anim == "CameraSwirl") { Start(); }
 	}
 	
 	private void _on_Area_area_entered(Area area)
