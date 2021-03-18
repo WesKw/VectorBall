@@ -65,6 +65,6 @@ material = ExtResource( 4 )
 [node name="Goal" parent="Geometry" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.99382e-06, -17, -80 )
 
-[node name="BeginnerWorldEnv" parent="." instance=ExtResource( 2 )]
+[node name="WorldEnv" parent="." instance=ExtResource( 2 )]
 
 [node name="DirectionalLight" parent="." instance=ExtResource( 7 )]

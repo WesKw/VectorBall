@@ -91,6 +91,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -48 )
 
 [node name="ObjectManager" parent="." instance=ExtResource( 2 )]
 
-[node name="WorldEnvironment" parent="." instance=ExtResource( 3 )]
+[node name="WorldEnv" parent="." instance=ExtResource( 3 )]
 
 [editable path="Geometry/Floor1"]

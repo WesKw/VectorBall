@@ -20,7 +20,7 @@ public class Title : Control
 		btnContainer.GetChild<Button>((int)currentBtn).Modulate = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 		btnContainer.GetChild<Button>(1).Modulate = new Color(1.0f, 1.0f, 1.0f, 0.5f);
 		GetNode<AnimationPlayer>("AnimationPlayer").Play("FadeIn");
-		GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play(0);
+		//GetNode<AudioStreamPlayer>("AudioStreamPlayer").Play(0);
 	}
 	
 	public override void _Process(float delta)

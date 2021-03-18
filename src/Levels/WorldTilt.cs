@@ -3,8 +3,9 @@ using System;
 
 public class WorldTilt : WorldEnvironment
 {
-	float maxTilt;
-	Spatial camPivot;
+	const float TILT_MULTIPLIER = 6.5f;
+	static float maxTilt;
+	static Spatial camPivot;
 	
 	public float MaxTilt
 	{
@@ -15,7 +16,7 @@ public class WorldTilt : WorldEnvironment
 	public Spatial CamPivot
 	{
 		get { return CamPivot; }
-		set { CamPivot = value; }
+		set { camPivot = value; }
 	}
 	
 	public override void _Ready()
@@ -26,16 +27,16 @@ public class WorldTilt : WorldEnvironment
 	public override void _PhysicsProcess(float delta)
 	{
 		/*
-		Vector3 gravity = Vector3.Zero;
+		Vector3 tilt = Vector3.Zero;
 		//get strength of control stick tilt
 		float horiz = Input.GetActionStrength("tilt_right") - Input.GetActionStrength("tilt_left");
 		float vert = Input.GetActionStrength("tilt_down") - Input.GetActionStrength("tilt_up");
 		//adjust gravity vector based on tilt, using basis.z and basis.x of camera to move ball based on the camera
-		gravity = ( camPivot.GlobalTransform.basis.z * vert * Mathf.Rad2Deg(maxTilt) )
-				 + ( camPivot.GlobalTransform.basis.x * horiz * Mathf.Rad2Deg(maxTilt) );
-		gravity.y = BackgroundSkyRotation.y;
+		tilt = ( camPivot.GlobalTransform.basis.x * -vert * Mathf.Rad2Deg(maxTilt/TILT_MULTIPLIER) )
+				 + ( camPivot.GlobalTransform.basis.z * -horiz * Mathf.Rad2Deg(maxTilt/TILT_MULTIPLIER) );
+		tilt.y = Environment.BackgroundSkyRotationDegrees.y;
 		//Update server vector
-		BackgroundSkyRotationDegrees = gravity;
+		Environment.BackgroundSkyRotationDegrees = tilt;
 		*/
 	}
 }

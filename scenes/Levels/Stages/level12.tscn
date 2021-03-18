@@ -101,7 +101,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, -30, -96 )
 [node name="DeathBarrier" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -104, 0 )
 
-[node name="WorldEnvironment" parent="." instance=ExtResource( 2 )]
+[node name="WorldEnv" parent="." instance=ExtResource( 2 )]
 
 [node name="ObjectManager" parent="." instance=ExtResource( 10 )]
 

@@ -77,7 +77,7 @@ height = 0.5
 depth = 0.5
 material = ExtResource( 7 )
 
-[node name="BeginnerWorldEnv" parent="." instance=ExtResource( 3 )]
+[node name="WorldEnv" parent="." instance=ExtResource( 3 )]
 
 [node name="DirectionalLight" parent="." instance=ExtResource( 4 )]
 

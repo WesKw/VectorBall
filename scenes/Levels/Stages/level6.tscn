@@ -47,7 +47,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, -58 )
 [node name="DeathBarrier" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -38, 0 )
 
-[node name="BeginnerWorldEnv" parent="." instance=ExtResource( 5 )]
+[node name="WorldEnv" parent="." instance=ExtResource( 5 )]
 
 [node name="DirectionalLight" parent="." instance=ExtResource( 8 )]
 

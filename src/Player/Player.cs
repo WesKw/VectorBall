@@ -38,17 +38,10 @@ public class Player : Spatial
 	[Signal]
 	public delegate void update_translation(Vector3 playerBodyTranslation);
 	
-	public int Lives
-	{
-		get { return lives; }
-		set { lives = value; }
-	}
-	
-	public Vector3 PlayerBodyTranslation
-	{
-		get { return playerBody.Translation; }
-		set { }
-	}
+	public int Lives { get { return lives; } }
+	public Vector3 PlayerBodyTranslation { get { return playerBody.Translation; } }
+	public float MaxSpeed { get { return maxSpeed; } }
+	public Spatial CamPivot { get { return camPivot; } }
 	
 	public void BodyLock(bool state)
 	{
@@ -169,7 +162,7 @@ public class Player : Spatial
 			GetTree().ChangeScene("res://scenes/Title/Title.tscn");
 		} else
 		{
-			Lives--;
+			lives--;
 			//GD.Print(Lives);
 			Reset();
 		}

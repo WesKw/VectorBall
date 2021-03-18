@@ -50,7 +50,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 1, -64 )
 [node name="Collectable3" parent="Geometry/Collectables" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -79 )
 
-[node name="BeginnerWorldEnv" parent="." instance=ExtResource( 3 )]
+[node name="WorldEnv" parent="." instance=ExtResource( 3 )]
 script = ExtResource( 9 )
 
 [node name="DirectionalLight" parent="." instance=ExtResource( 7 )]

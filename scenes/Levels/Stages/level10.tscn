@@ -103,7 +103,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26, -9, -107 )
 [node name="Goal" parent="Geometry" instance=ExtResource( 8 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -70, -28, -107 )
 
-[node name="BeginnerWorldEnv" parent="." instance=ExtResource( 3 )]
+[node name="WorldEnv" parent="." instance=ExtResource( 3 )]
 
 [node name="DirectionalLight" parent="." instance=ExtResource( 2 )]
 

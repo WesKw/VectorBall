@@ -54,7 +54,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 44 )
 [node name="Floor5" parent="Geometry" instance=ExtResource( 6 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6.11959e-07, 0, -5.34992e-14 )
 
-[node name="BeginnerWorldEnv" parent="." instance=ExtResource( 2 )]
+[node name="WorldEnv" parent="." instance=ExtResource( 2 )]
 
 [node name="DirectionalLight" parent="." instance=ExtResource( 7 )]
 

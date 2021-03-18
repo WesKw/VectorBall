@@ -12,7 +12,17 @@ public class Level : Spatial
 	//private Vector3 stageLocation;
 	//private Vector3 startLocation;
 	//private RigidBody player;
+	//private float maxTilt;
 	private ObjectManager objectM;
+	private WorldTilt world;
+	
+	/*
+	public float MaxTilt
+	{
+		get { return maxTilt; }
+		set { maxTilt = value; }
+	}
+	*/
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -21,6 +31,7 @@ public class Level : Spatial
 		//player = GetParent().GetNode("Player/RigidBody") as RigidBody;
 		objectM = GetNodeOrNull("ObjectManager") as ObjectManager;
 		//Connect("tree_exiting", this, "on_despawn");
+		//world = GetNode<WorldTilt>("WorldEnv");
 	}
 	
 	private void _on_DeathArea_area_entered(object body)
@@ -39,5 +50,13 @@ public class Level : Spatial
 		}
 	}
 	
-	
+	public void SetupWorld(float tilt, Spatial playerCam)
+	{
+		if(world != null) 
+		{
+			world.MaxTilt = tilt;
+			world.CamPivot = playerCam;
+		}
+		
+	}
 }

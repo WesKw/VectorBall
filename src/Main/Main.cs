@@ -74,6 +74,7 @@ public class Main : Spatial
 		level = (Level)currentLevel.Instance();
 		level.Name = "level" + id.ToString();
 		AddChild(level);
+		//level.SetupWorld(player.MaxSpeed, player.CamPivot);
 		CheckConnections();
 		player.PlayIntro("CameraSwirl");
 		gameUI.UpdateLevelName(levelList[id-1]);
