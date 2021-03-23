@@ -1,2 +1,2 @@
 # VectorBall
-A monkey ball clone made using the Godot game engine.
+A monkey ball type game made using the Godot game engine.
