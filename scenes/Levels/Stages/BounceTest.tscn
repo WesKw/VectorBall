@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/space_material.tres" type="Material" id=1]
+[ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Levels/SpaceStartPlatform.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Levels/SpaceEnvironment.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Levels/ObjectManager.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Levels/Level.cs" type="Script" id=7]
+
+[node name="BounceTest" type="Spatial"]
+script = ExtResource( 7 )
+
+[node name="Geometry" type="Spatial" parent="."]
+
+[node name="Goal" parent="Geometry" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -696, -40 )
+
+[node name="Floor1" parent="Geometry" instance=ExtResource( 3 )]
+
+[node name="CSGBox" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -100, -54 )
+use_collision = true
+width = 64.0
+height = 14.0
+depth = 60.0
+material = ExtResource( 1 )
+
+[node name="CSGBox2" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -300, -188 )
+use_collision = true
+width = 64.0
+height = 20.0
+depth = 60.0
+material = ExtResource( 1 )
+
+[node name="CSGBox3" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -700, -57 )
+use_collision = true
+width = 64.0
+height = 6.0
+depth = 60.0
+material = ExtResource( 1 )
+
+[node name="DeathBarrier" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0 )
+
+[node name="ObjectManager" parent="." instance=ExtResource( 6 )]
+
+[node name="SpaceEnvironment" parent="." instance=ExtResource( 5 )]

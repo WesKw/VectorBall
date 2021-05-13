@@ -1,0 +1,81 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/Levels/Level.cs" type="Script" id=1]
+[ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Levels/ObjectManager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Levels/SunsetEnvironment.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/advanced.tres" type="Material" id=5]
+[ext_resource path="res://scenes/Levels/StartPlatform.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=7]
+
+[node name="level13" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="DeathBarrier" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -111, 0 )
+
+[node name="Geometry" type="Spatial" parent="."]
+
+[node name="Floor1" parent="Geometry" instance=ExtResource( 6 )]
+material = ExtResource( 5 )
+
+[node name="CSGPolygon" type="CSGPolygon" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, -30 )
+use_collision = true
+polygon = PoolVector2Array( 4, 10, 2, 18, 11, 0, 5, 2 )
+mode = 1
+spin_degrees = 360.0
+spin_sides = 32
+material = ExtResource( 5 )
+
+[node name="CSGPolygon2" type="CSGPolygon" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, -18, -30 )
+use_collision = true
+polygon = PoolVector2Array( 1, 18, 2, 18, 2, 5, 2, 0 )
+mode = 1
+spin_degrees = 360.0
+spin_sides = 16
+material = ExtResource( 5 )
+
+[node name="CSGPolygon3" type="CSGPolygon" parent="Geometry"]
+transform = Transform( 0.902235, 0.269843, 0.336389, -0.120265, -0.591652, 0.797173, 0.414136, -0.759693, -0.501356, -1, -37, -28 )
+use_collision = true
+polygon = PoolVector2Array( 3, 16, 4, 16, 4, 0, 3, 0 )
+mode = 1
+spin_degrees = 180.0
+spin_sides = 12
+material = ExtResource( 5 )
+
+[node name="CSGPolygon4" type="CSGPolygon" parent="Geometry"]
+transform = Transform( 0.902235, 0.269843, 0.336389, -0.120265, -0.591652, 0.797173, 0.414136, -0.759693, -0.501356, 3, -48, -40 )
+use_collision = true
+polygon = PoolVector2Array( 3, 16, 4, 24, 4, 0, 3, 0 )
+mode = 1
+spin_degrees = 180.0
+spin_sides = 12
+material = ExtResource( 5 )
+
+[node name="CSGPolygon5" type="CSGPolygon" parent="Geometry"]
+transform = Transform( 0.57429, 0.613537, 0.541999, -0.120265, -0.591652, 0.797173, 0.80977, -0.522992, -0.265993, 10, -66, -59 )
+use_collision = true
+polygon = PoolVector2Array( 3, 16, 4, 24, 4, 0, 4, 0 )
+mode = 1
+spin_degrees = 180.0
+spin_sides = 12
+material = ExtResource( 5 )
+
+[node name="CSGBox" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28, -88, -75 )
+use_collision = true
+width = 24.0
+depth = 26.0
+material = ExtResource( 5 )
+
+[node name="Goal" parent="Geometry" instance=ExtResource( 7 )]
+transform = Transform( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 35, -86, -81 )
+
+[node name="ObjectManager" parent="." instance=ExtResource( 3 )]
+
+[node name="WorldEnv" parent="." instance=ExtResource( 4 )]
+
+[editable path="Geometry/Floor1"]
