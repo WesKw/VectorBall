@@ -92,6 +92,10 @@ __meta__ = {
 [node name="Start" type="Button" parent="Title/MarginContainer/Buttons/VBoxContainer"]
 margin_right = 210.0
 margin_bottom = 31.0
+focus_neighbour_top = NodePath("../Exit")
+focus_neighbour_bottom = NodePath("../LevelSelect")
+focus_next = NodePath("../LevelSelect")
+focus_previous = NodePath("../Exit")
 custom_fonts/font = ExtResource( 2 )
 text = "New Game"
 
@@ -99,6 +103,10 @@ text = "New Game"
 margin_top = 35.0
 margin_right = 210.0
 margin_bottom = 66.0
+focus_neighbour_top = NodePath("../Start")
+focus_neighbour_bottom = NodePath("../Exit")
+focus_next = NodePath("../Exit")
+focus_previous = NodePath("../Start")
 custom_fonts/font = ExtResource( 2 )
 disabled = true
 text = "Level Select"
@@ -107,6 +115,10 @@ text = "Level Select"
 margin_top = 70.0
 margin_right = 210.0
 margin_bottom = 101.0
+focus_neighbour_top = NodePath("../LevelSelect")
+focus_neighbour_bottom = NodePath("../Start")
+focus_next = NodePath("../Start")
+focus_previous = NodePath("../LevelSelect")
 custom_fonts/font = ExtResource( 2 )
 text = "Exit"
 
@@ -138,4 +150,5 @@ current = true
 fov = 90.0
 far = 1000.0
 [connection signal="pressed" from="Title/MarginContainer/Buttons/VBoxContainer/Start" to="Title" method="_on_Start_pressed"]
+[connection signal="pressed" from="Title/MarginContainer/Buttons/VBoxContainer/LevelSelect" to="Title" method="_on_LevelSelect_pressed"]
 [connection signal="pressed" from="Title/MarginContainer/Buttons/VBoxContainer/Exit" to="Title" method="_on_Exit_pressed"]

@@ -1,23 +1,25 @@
 using Godot;
 using System;
+using System.Linq;
 
 public class Player : Spatial
 {
 	private const float GRAV_SCALE = 4.0f;
-	
+	private bool grounded = true;
 	private bool inputAllowed = true;
 	//private bool grounded;
 	private int lives = 3;
 	private int collected = 0;
-	private const float maxSpeed = .60f;
+	private const float maxSpeed = 1.5f;
 	private const float maxTilt = 31.0f;
 	//private float maxVelocity = 120;
 	private float camSpeed = 2.0f;
 	private ClippedCamera cam;
 	private Spatial camPivot;
 	//private Vector3 camTranslation;
-	private Vector3 camRotation;
+	private Vector3 pivotRotation;
 	private PlayerBody playerBody;
+	private Vector2 camDirection;
 	private Vector3 gravity = new Vector3(0, -1, 0);
 	private Vector3 startPos = new Vector3(0, 3.0f, 0);
 	private System.Timers.Timer fallTimer = new System.Timers.Timer(3500);
@@ -53,16 +55,27 @@ public class Player : Spatial
 		playerBody.AxisLockAngularZ = state;
 	}
 	
+	private float CheckCollision(Vector3 lastVelocity)
+	{
+		Godot.Collections.Array colliders = playerBody.GetCollidingBodies();
+		//player should be in air
+		if(colliders.Count == 0)
+			return .4f;
+		else
+			return 1;
+	}
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		camDirection = new Vector2(0, 0);
 		//Set up timer
 		playerBody = GetNode("RigidBody") as PlayerBody;
 		playerBody.Translation = startPos;
 		cam = GetNode("CameraPivot/Camera") as ClippedCamera;
 		camPivot = GetNode("CameraPivot") as Spatial;
 		animator = GetNode("AnimationPlayer") as AnimationPlayer;
-		camRotation = new Vector3();
+		pivotRotation = new Vector3();
 		Connect("on_reset", GetNode<Main>(".."), nameof(on_reset));
 		Connect("on_move", GetNode<GameUI>("../GameUI"), "on_update_player");
 		Connect("update_translation", GetNode<GameUI>("../GameUI"), "UpdatePlayerTranslation");
@@ -74,12 +87,14 @@ public class Player : Spatial
 	
 	private void ProcessInput()
 	{
+		Vector3 lastVel = playerBody.LinearVelocity;
+		float speedModifier = CheckCollision(lastVel);
 		//get strength of control stick tilt
-		float horiz = Input.GetActionStrength("tilt_right") - Input.GetActionStrength("tilt_left");
 		float vert = Input.GetActionStrength("tilt_down") - Input.GetActionStrength("tilt_up");
+		float horiz = Input.GetActionStrength("tilt_right") - Input.GetActionStrength("tilt_left");
 		//adjust gravity vector based on tilt, using basis.z and basis.x of camera to move ball based on the camera
-		gravity = ( camPivot.GlobalTransform.basis.z * vert*maxSpeed )
-				 + ( camPivot.GlobalTransform.basis.x * horiz*maxSpeed );
+		gravity = ( camPivot.GlobalTransform.basis.z * vert*maxSpeed*speedModifier )
+				 + ( camPivot.GlobalTransform.basis.x * horiz*maxSpeed*speedModifier );
 		gravity.y = -1;
 		//Update server vector
 		PhysicsServer.AreaSetParam(GetViewport().FindWorld().Space, (PhysicsServer.AreaParameter)1, gravity);
@@ -91,25 +106,46 @@ public class Player : Spatial
 	
 	private void UpdateCamera(float horiz, float vert)
 	{
+		camDirection.x = playerBody.LinearVelocity.x / playerBody.LinearVelocity.Length();
+		camDirection.y = playerBody.LinearVelocity.z / playerBody.LinearVelocity.Length();
+		//camDirection.x = gravity.x / gravity.Length();
+		//camDirection.y = gravity.z / gravity.Length();
+		//camDirection *= -1; //invert vector
+		pivotRotation = camPivot.RotationDegrees;
+		float angle = camDirection.AngleTo(Vector2.Up);
+		float xTilt = 0f;
+		//if(playerBody.LinearVelocity.y < -15.0f)
+			//xTilt = Mathf.Lerp(pivotRotation.x, -45.0f, .3f);
+		//else
+			//xTilt = Mathf.Lerp(pivotRotation.x, 0.0f, .3f);
+		float zTilt = 0f;//Mathf.Lerp(pivotRotation.z, horiz * maxTilt / 2, .2f);
+		
+		//Quat newPivot = new Quat(new Vector3(camPivot.RotationDegrees.x, angle, camPivot.RotationDegrees.z));
+		Quat newPivot = new Quat(new Vector3(xTilt, angle, zTilt));
+		Quat originalPivot = camPivot.Transform.basis.Quat();
+		Quat result = originalPivot.Slerp(newPivot, .025f);
+		Basis newBasis = new Basis(result);
+		
+		Transform cameraTransform = camPivot.Transform;
+		cameraTransform.basis = newBasis;
+		camPivot.Transform = cameraTransform;
+		
 		Vector3 playerVel = playerBody.LinearVelocity;
 		camPivot.Translation = playerBody.Translation;
 		
-		camRotation = camPivot.RotationDegrees;
-		//camRotation.x = Mathf.Lerp(camRotation.x, playerVel.y * -vert * maxTilt, .2f);
-		camRotation.x = Mathf.Lerp(camRotation.x, -vert * maxTilt, .2f);
-		camRotation.y -= horiz * camSpeed;
-		//camRotation.y = Mathf.Lerp(camRotation.y, horiz * playerVel, .2f * camSpeed);
-		camRotation.z = Mathf.Lerp(camRotation.z, horiz * maxTilt / 2, .2f);
+		//camRotation = camPivot.GlobalTransform.basis.z;
+		//pivotRotation.x = Mathf.Lerp(pivotRotation.x, -vert * maxTilt, .2f);
+		//pivotRotation.y = camPivot.RotationDegrees.y;
 		
-		//Moves the camera above the player if the player is falling
-		if(playerBody.LinearVelocity.y < -15.0f)
-			camRotation.x = Mathf.Lerp(camRotation.x, -45.0f, .3f);
-		else
-			camRotation.x = Mathf.Lerp(camRotation.x, 0.0f, .3f);
+		/*
+		if(camDirection.x != 0 && camDirection.y != 0)
+		{
+			pivotRotation.y = Mathf.Lerp(pivotRotation.y, Mathf.Rad2Deg(angle), .05f);
+		}
+		*/
 		
-		camPivot.RotationDegrees = camRotation;
-		//camPivot.RotationDegrees = cam.GlobalTransform.basis.z;
-		//cam.LookAt(Vector3.Up, playerBody.Translation);
+		//camPivot.RotationDegrees = pivotRotation;
+		//cam.LookAt(camPivot.Translation, Vector3.Up);
 	}
 	
 	public override void _Process(float delta)

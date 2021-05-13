@@ -3,12 +3,20 @@ using System;
 
 public class Main : Spatial
 {
+	private enum Mode
+	{
+		Main,
+		Practice
+	}
 	//An array that contains every level name
 	private string[] levelList = {  "Beginner", "Split", "Downhill", "Uphill", "Sideways",
 									"Elevator", "Button", "Rotation", "Airtime", "Exam", 
-									"Pitstop", "Hole-in-one" };
+									"Pitstop", "Hole-in-one", "Funnel", "Spinning Cone" };
 									
+	//private string[] levelList = { "BounceTest", "SlideTest", "SpeedTest" };
+	private Mode currentMode;
 	private bool reset;
+	private bool paused;
 	[Export]
 	private int levelID = 1;
 	private int currentTime = 60;
@@ -67,9 +75,15 @@ public class Main : Spatial
 	}
 	
 	//Load instance of level based on level ID
-	private void LoadLevel(int id)
+	private void LoadLevel(int id, string levelName = null)
 	{
-		string levelPath = "res://scenes/Levels/Stages/level" + id.ToString() + ".tscn";
+		string levelPath;
+		if(levelName != null)
+			levelPath = "res://scenes/Levels/Stages/" + levelName + ".tscn";
+		else
+			levelPath = "res://scenes/Levels/Stages/level" + id.ToString() + ".tscn";
+				
+		//string levelPath = "res://scenes/Levels/Stages/SlideTest.tscn";
 		currentLevel = (PackedScene)ResourceLoader.Load(levelPath);
 		level = (Level)currentLevel.Instance();
 		level.Name = "level" + id.ToString();
@@ -114,13 +128,18 @@ public class Main : Spatial
 		}
 		else
 		{
-			GD.Print("Load next level now");
-			//Remove current level
-			level.QueueFree();
-			player.Reset();
-			LoadLevel(levelID);
-			gameUI.PlayAnimation("FadeIn");
+			LoadNextLevel();
 		}
+	}
+	
+	private void LoadNextLevel(string path = null)
+	{
+		GD.Print("Load next level now");
+		//Remove current level
+		level.QueueFree();
+		player.Reset();
+		LoadLevel(levelID, path);
+		gameUI.PlayAnimation("FadeIn");
 	}
 	
 	private void on_fall_out()
@@ -164,6 +183,7 @@ public class Main : Spatial
 			levelTimer.Interval = 1000;
 			levelTimer.AutoReset = false;
 			levelTimer.Start();
+			GD.Print("Start levelTimer");
 		}
 	}
 	
@@ -186,5 +206,10 @@ public class Main : Spatial
 			levelTimer.Start();
 			gameUI.UpdateTimer(currentTime);
 		}
+	}
+	
+	private void OnChangeLevel(string path)
+	{
+		LoadNextLevel(path);
 	}
 }
