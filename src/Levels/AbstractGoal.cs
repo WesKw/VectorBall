@@ -3,15 +3,16 @@ using System;
 
 public abstract class AbstractGoal : Spatial
 {
+	protected bool finished = false;
 	protected int levelModifier;
 	[Signal]
 	public delegate void goal_entered(int modifier);
 	
 	private void on_goal_reached(object body)
 	{
-		if(body is PlayerBody)
+		if(body is PlayerBody && !finished)
 		{
-			GD.Print("GOAL!");
+			finished = true;
 			EmitSignal(nameof(goal_entered), levelModifier);
 		}
 	}

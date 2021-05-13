@@ -17,7 +17,7 @@ public class RotatingBridge : GameObject
 	public override void _PhysicsProcess(float delta)
 	{
 		time += delta;
-		rot.y += (float)Math.Sin(time);
+		rot.y += (float)Math.Sin(time)/2;
 		bridge.RotationDegrees = rot;
 	}
 	
