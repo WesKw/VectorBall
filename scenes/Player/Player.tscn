@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://src/Player/PlayerBody.cs" type="Script" id=2]
 [ext_resource path="res://assets/balltexture.png" type="Texture" id=3]
+[ext_resource path="res://assets/glasstexture.jpg" type="Texture" id=4]
 
 [sub_resource type="PhysicsMaterial" id=1]
 rough = true
@@ -11,9 +12,9 @@ bounce = 0.5
 [sub_resource type="SpatialMaterial" id=2]
 flags_transparent = true
 params_cull_mode = 1
-albedo_texture = ExtResource( 3 )
+albedo_texture = ExtResource( 4 )
 clearcoat_enabled = true
-clearcoat = 0.5
+clearcoat = 0.75
 clearcoat_gloss = 1.0
 clearcoat_texture = ExtResource( 3 )
 depth_enabled = true
@@ -21,6 +22,9 @@ depth_scale = 2.0
 depth_deep_parallax = false
 depth_flip_tangent = false
 depth_flip_binormal = false
+refraction_enabled = true
+refraction_scale = 0.05
+refraction_texture_channel = 0
 
 [sub_resource type="SphereShape" id=3]
 radius = 0.499409

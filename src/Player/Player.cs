@@ -60,7 +60,7 @@ public class Player : Spatial
 		Godot.Collections.Array colliders = playerBody.GetCollidingBodies();
 		//player should be in air
 		if(colliders.Count == 0)
-			return .4f;
+			return .2f;
 		else
 			return 1;
 	}

@@ -7,7 +7,7 @@ public class PlayerBody : RigidBody
 	private bool intro;
 	private Vector3 startPos = new Vector3(0, 3.0f, 0);
 	[Export]
-	private float maxSpeed = 15f;
+	private float maxSpeed = 12.5f;
 	
 	public bool Reset
 	{
