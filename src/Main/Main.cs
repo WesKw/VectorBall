@@ -90,8 +90,9 @@ public class Main : Spatial
 		AddChild(level);
 		//level.SetupWorld(player.MaxSpeed, player.CamPivot);
 		CheckConnections();
-		player.PlayIntro("CameraSwirl");
 		gameUI.UpdateLevelName(levelList[id-1]);
+		gameUI.PlayAnimation("FadeIn", 1f);
+		player.PlayIntro("CameraSwirl");
 		//startTimer.Enabled = true;
 		//controller.CurrentLevel = level.GetNode("Geometry") as Spatial;
 	}
@@ -156,7 +157,7 @@ public class Main : Spatial
 		Reset = false;
 		currentTime = 60;
 		gameUI.UpdateTimer(currentTime);
-		gameUI.PlayAnimation("FadeIn");
+		gameUI.PlayAnimation("FadeIn", 2f);
 		player.PlayIntro("CameraSwirl");
 	}
 	
@@ -183,7 +184,7 @@ public class Main : Spatial
 			levelTimer.Interval = 1000;
 			levelTimer.AutoReset = false;
 			levelTimer.Start();
-			GD.Print("Start levelTimer");
+			//GD.Print("Start levelTimer");
 		}
 	}
 	

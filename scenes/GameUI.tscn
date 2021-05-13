@@ -26,6 +26,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("MarginContainer/WorldText/LevelName:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=3]
 length = 0.35
@@ -167,8 +179,21 @@ tracks/5/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
+tracks/6/type = "value"
+tracks/6/path = NodePath("MarginContainer/WorldText/LevelName:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [node name="GameUI" type="Control"]
+pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -189,10 +214,12 @@ __meta__ = {
 }
 
 [node name="WorldText" type="Control" parent="MarginContainer"]
+pause_mode = 1
 margin_right = 954.0
 margin_bottom = 550.0
 
 [node name="LevelName" type="Label" parent="MarginContainer/WorldText"]
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.112
 anchor_top = 0.973
 anchor_right = 0.112
@@ -223,12 +250,12 @@ margin_right = 954.0
 margin_bottom = 550.0
 
 [node name="ViewportContainer" type="ViewportContainer" parent="MarginContainer/CameraView"]
-anchor_left = 1.0
-anchor_top = 1.0
+anchor_left = 0.844
+anchor_top = 0.727
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -150.0
-margin_top = -150.0
+margin_left = -1.17603
+margin_top = 0.149963
 stretch = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -236,6 +263,7 @@ __meta__ = {
 
 [node name="Viewport" type="Viewport" parent="MarginContainer/CameraView/ViewportContainer"]
 size = Vector2( 150, 150 )
+transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
 
@@ -265,10 +293,15 @@ margin_bottom = 32.0
 rect_scale = Vector2( 0.25, 0.25 )
 rect_pivot_offset = Vector2( 32, 32 )
 texture = ExtResource( 4 )
+expand = true
 stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Control" type="Control" parent="MarginContainer/CameraView/ViewportContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [node name="GOContainer" type="Control" parent="MarginContainer"]
 margin_right = 954.0
@@ -310,6 +343,7 @@ __meta__ = {
 }
 
 [node name="TimerControl" type="Control" parent="MarginContainer"]
+pause_mode = 1
 margin_right = 954.0
 margin_bottom = 550.0
 
@@ -327,6 +361,52 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="LevelSelect" type="Control" parent="MarginContainer"]
+pause_mode = 2
+margin_right = 954.0
+margin_bottom = 550.0
+
+[node name="DevMenu" type="PopupDialog" parent="MarginContainer/LevelSelect"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -142.5
+margin_top = -59.5
+margin_right = 142.5
+margin_bottom = 59.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="MarginContainer/LevelSelect/DevMenu"]
+anchor_left = 0.1
+anchor_top = 0.5
+anchor_right = 0.1
+anchor_bottom = 0.5
+margin_top = -20.0
+margin_right = 106.0
+margin_bottom = 20.0
+custom_fonts/font = ExtResource( 3 )
+align = 1
+max_length = 20
+clear_button_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="MarginContainer/LevelSelect/DevMenu"]
+anchor_left = 0.9
+anchor_top = 0.5
+anchor_right = 0.9
+anchor_bottom = 0.5
+margin_left = -53.0
+margin_top = -18.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 3 )
+text = "GO"
+
 [node name="ColorRect" type="ColorRect" parent="."]
 modulate = Color( 0, 0, 0, 0 )
 anchor_right = 1.0
@@ -343,3 +423,5 @@ anims/FadeIn = SubResource( 2 )
 anims/FadeOut = SubResource( 3 )
 anims/GO! = SubResource( 4 )
 anims/ShowLevel = SubResource( 5 )
+[connection signal="pressed" from="MarginContainer/LevelSelect/DevMenu/Button" to="." method="_on_Button_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

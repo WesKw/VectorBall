@@ -3,6 +3,7 @@ using System;
 
 public class GameUI : Control
 {
+	bool paused = false;
 	bool allowZoom = false;
 	int zoomLevel = 2;
 	float[] zooms = {36f, 24f, 12f};
@@ -15,11 +16,14 @@ public class GameUI : Control
 	Camera overHeadCam;
 	AnimationPlayer animator;
 	
+	[Signal]
+	public delegate void ChangeLevel(string levelName);
+	
 	private void UpdateCamTransform()
 	{
 		if(allowZoom)
 		{
-			GD.Print("Gamer");
+			//GD.Print("Gamer");
 			camTranslation.y = Mathf.Lerp(camTranslation.y, zooms[zoomLevel], .2f);
 			if(camTranslation.y == zooms[zoomLevel]) allowZoom = false;
 		}
@@ -29,12 +33,13 @@ public class GameUI : Control
 		
 		camRotation.z = 0 + (15 * horiz);
 		camRotation.x = 0 - (15 * vert);
-		pivot.RotationDegrees = camRotation;
+		//pivot.RotationDegrees = camRotation;
 	}
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		Connect("ChangeLevel", (Owner as Main), "OnChangeLevel");
 		pivot = GetNode("MarginContainer/CameraView/ViewportContainer/Viewport/CamPivot") as Spatial;
 		overHeadCam = GetNode("MarginContainer/CameraView/ViewportContainer/Viewport/CamPivot/OHCamera") as Camera;
 		animator = GetNode("AnimationPlayer") as AnimationPlayer;
@@ -73,12 +78,24 @@ public class GameUI : Control
 			else if(zoomLevel < 0)
 				zoomLevel = 2;
 		}
+		
+		if(Input.IsActionJustPressed("select_level") && !paused) 
+		{ 
+			GetNode<PopupDialog>("MarginContainer/LevelSelect/DevMenu").Show();
+			paused = true;
+			GetTree().Paused = paused;
+		} else if(Input.IsActionJustPressed("ui_cancel") && paused)
+		{
+			GetNode<PopupDialog>("MarginContainer/LevelSelect/DevMenu").Hide();
+			paused = false;
+			GetTree().Paused = paused;
+		}
 	}
 	
-	public void PlayAnimation(string anim)
+	public void PlayAnimation(string anim, float speed = 1)
 	{
 		//GD.Print("Play " + anim);
-		animator.Play(anim);
+		animator.Play(anim, -1f, speed);
 	}
 	
 	private void on_update_player(float camPivot)
@@ -100,9 +117,27 @@ public class GameUI : Control
 	
 	public void UpdateLevelName(string levelName)
 	{
+		//GetNode<Label>("MarginContainer/WorldText/LevelName").Visible = false;
 		GetNode<Label>("MarginContainer/WorldText/LevelName").Text = levelName;
-		animator.AssignedAnimation = "ShowLevel";
-		animator.Seek(0);
-		animator.Play("ShowLevel");
+		//animator.AssignedAnimation = "ShowLevel";
+		//animator.Seek(0);
+		//animator.Play("ShowLevel");
+	}
+	
+	private void _on_Button_pressed()
+	{
+		paused = false;
+		GetTree().Paused = paused;
+		GetNode<PopupDialog>("MarginContainer/LevelSelect/DevMenu").Hide();
+		string levelPath = GetNode<LineEdit>("MarginContainer/LevelSelect/DevMenu/LineEdit").Text;
+		EmitSignal("ChangeLevel", levelPath);
+	}
+	
+	private void _on_AnimationPlayer_animation_finished(String anim_name)
+	{
+		if(anim_name == "FadeIn")
+		{
+			PlayAnimation("ShowLevel");
+		}
 	}
 }

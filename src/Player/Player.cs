@@ -108,9 +108,6 @@ public class Player : Spatial
 	{
 		camDirection.x = playerBody.LinearVelocity.x / playerBody.LinearVelocity.Length();
 		camDirection.y = playerBody.LinearVelocity.z / playerBody.LinearVelocity.Length();
-		//camDirection.x = gravity.x / gravity.Length();
-		//camDirection.y = gravity.z / gravity.Length();
-		//camDirection *= -1; //invert vector
 		pivotRotation = camPivot.RotationDegrees;
 		float angle = camDirection.AngleTo(Vector2.Up);
 		float xTilt = 0f;
