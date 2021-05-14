@@ -3,14 +3,11 @@ using System;
 
 public abstract class GameObject : Spatial
 {
-	protected bool doAction = false;
+	protected bool doAction = false;		//game object performs action if true, used for switches
+	protected Vector3 currPos;				//current position
+	protected Vector3 startPos;				//object's starting position
+	protected Vector3 rot = Vector3.Zero;	//original rotation
 	
-	protected abstract void SwitchPressed();
-	//public abstract void on_switch_pressed();
-	
-	protected Vector3 currPos;
-	protected Vector3 startPos;
-	protected Vector3 rot = Vector3.Zero;
-	
-	protected abstract void Reset();
+	protected abstract void Reset();		//called when level resets
+	protected abstract void SwitchPressed();//called when an attached switch is pressed
 }

@@ -57,6 +57,5 @@ public class Level : Spatial
 			world.MaxTilt = tilt;
 			world.CamPivot = playerCam;
 		}
-		
 	}
 }

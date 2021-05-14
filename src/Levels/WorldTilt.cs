@@ -19,11 +19,6 @@ public class WorldTilt : WorldEnvironment
 		set { camPivot = value; }
 	}
 	
-	public override void _Ready()
-	{
-		
-	}
-	
 	public override void _PhysicsProcess(float delta)
 	{
 		/*

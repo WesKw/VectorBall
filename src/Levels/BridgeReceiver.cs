@@ -28,8 +28,6 @@ public class BridgeReceiver : GameObject
 	
 	protected override void SwitchPressed() { doAction = true; GD.Print("Good"); }
 	
-	//public override void on_switch_pressed() => doAction = true;
-	
 	protected override void Reset()
 	{
 		attachedSwitch.Reset();

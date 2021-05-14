@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Levels/Level.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Levels/StartPlatform.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/advanced.tres" type="Material" id=4]
+[ext_resource path="res://scenes/Levels/Banana.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Levels/ObjectManager.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Levels/SunsetEnvironment.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=8]
 
 [node name="level15" type="Spatial"]
 script = ExtResource( 1 )
@@ -13,7 +17,33 @@ script = ExtResource( 1 )
 [node name="Floor1" parent="Geometry" instance=ExtResource( 3 )]
 material = ExtResource( 4 )
 
+[node name="Banana" parent="Geometry" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24 )
+
+[node name="Geometry" parent="Geometry/Banana" index="0"]
+transform = Transform( -1.62921e-07, 0, 1, 0, 1, 0, -1, 0, -1.62921e-07, 0, 0, 3 )
+
+[node name="Switch" parent="Geometry/Banana" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.311172, -38 )
+
+[node name="CSGBox" type="CSGBox" parent="Geometry"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -61 )
+use_collision = true
+width = 12.0
+height = 2.00635
+depth = 16.0
+material = ExtResource( 4 )
+
+[node name="Goal" parent="Geometry" instance=ExtResource( 8 )]
+transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -33, 1, -65 )
+
 [node name="DeathBarrier" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0 )
 
+[node name="ObjectManager" parent="." instance=ExtResource( 6 )]
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 7 )]
+
 [editable path="Geometry/Floor1"]
+
+[editable path="Geometry/Banana"]
