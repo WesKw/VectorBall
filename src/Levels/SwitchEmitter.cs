@@ -8,8 +8,11 @@ public abstract class SwitchEmitter : StaticBody
 	
 	protected bool pressed = false;
 	
-	protected abstract void SwitchAction();
-	protected abstract void FindSwitchObjects();
+	protected virtual void ConnectToParent()
+	{
+		GameObject parent = GetNode("..") as GameObject;
+		Connect("switch_pressed", parent, "SwitchPressed");
+	}
 	
 	public virtual void Reset()
 	{

@@ -120,6 +120,7 @@ public class Player : Spatial
 		//Quat newPivot = new Quat(new Vector3(camPivot.RotationDegrees.x, angle, camPivot.RotationDegrees.z));
 		Quat newPivot = new Quat(new Vector3(xTilt, angle, zTilt));
 		Quat originalPivot = camPivot.Transform.basis.Quat();
+		originalPivot = originalPivot.Normalized();
 		Quat result = originalPivot.Slerp(newPivot, .025f);
 		Basis newBasis = new Basis(result);
 		

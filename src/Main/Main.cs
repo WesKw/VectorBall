@@ -11,7 +11,8 @@ public class Main : Spatial
 	//An array that contains every level name
 	private string[] levelList = {  "Beginner", "Split", "Downhill", "Uphill", "Sideways",
 									"Elevator", "Button", "Rotation", "Airtime", "Exam", 
-									"Pitstop", "Hole-in-one", "Funnel", "Spinning Cone" };
+									"Pitstop", "Hole-in-one", "Funnel", "Spinning Prisms",
+									"Shitty Banana" };
 									
 	//private string[] levelList = { "BounceTest", "SlideTest", "SpeedTest" };
 	private Mode currentMode;

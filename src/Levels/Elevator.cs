@@ -11,6 +11,8 @@ public class Elevator : GameObject
 	Vector3 velocity = new Vector3(0, 0, 0);
 	KinematicBody elevator;
 	
+	protected override void SwitchPressed() {}
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{

@@ -8,6 +8,8 @@ public class RotatingBridge : GameObject
 	float time = 0;
 	KinematicBody bridge;
 	
+	protected override void SwitchPressed() {}
+	
 	public override void _Ready()
 	{
 		bridge = GetChild(0) as KinematicBody;

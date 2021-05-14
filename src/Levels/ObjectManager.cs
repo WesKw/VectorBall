@@ -11,7 +11,7 @@ public class ObjectManager : Node
 	{
 		foreach(Node x in geometry.GetChildren())
 		{
-			if((x is GameObject) || (x is SwitchEmitter))
+			if((x is GameObject))
 				Connect("on_reset", x, "Reset");
 		}
 	}

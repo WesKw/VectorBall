@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Levels/Level.cs" type="Script" id=1]
 [ext_resource path="res://scenes/Levels/DeathBarrier.tscn" type="PackedScene" id=2]
@@ -6,9 +6,8 @@
 [ext_resource path="res://assets/advanced.tres" type="Material" id=4]
 [ext_resource path="res://scenes/Levels/ObjectManager.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Levels/SunsetEnvironment.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/Levels/Stages/RotatingCylinder.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/Levels/Stages/RotatingPrism.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/Levels/Goal.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/Levels/GreenGoal.tscn" type="PackedScene" id=9]
 
 [node name="level14" type="Spatial"]
 script = ExtResource( 1 )
@@ -26,18 +25,14 @@ height = 1.0
 depth = 36.0
 material = ExtResource( 4 )
 
-[node name="RotatingCylinder" parent="Geometry" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -82 )
+[node name="RotatingPrism" parent="Geometry" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, -83 )
 
-[node name="Goal" parent="Geometry/RotatingCylinder" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -7 )
+[node name="Goal" parent="Geometry/RotatingPrism" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
-[node name="RotatingCylinder2" parent="Geometry" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, -129 )
-speed = 40.0
-
-[node name="GreenGoal" parent="Geometry/RotatingCylinder2" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -19 )
+[node name="RotatingPrism2" parent="Geometry" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -16, -140 )
 
 [node name="DeathBarrier" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -35, 0 )
@@ -48,6 +43,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -35, 0 )
 
 [editable path="Geometry/Floor1"]
 
-[editable path="Geometry/RotatingCylinder"]
+[editable path="Geometry/RotatingPrism"]
 
-[editable path="Geometry/RotatingCylinder2"]
+[editable path="Geometry/RotatingPrism2"]

@@ -1,17 +1,19 @@
 using Godot;
 using System;
 
-public class RotatingCylinder : GameObject
+public class RotatingPrism : GameObject
 {
 	[Export]
 	float speed = 20f;
 	private Vector3 startRot;
 	private KinematicBody body;
-
+	
+	protected override void SwitchPressed() {}
+	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		body = GetNode<KinematicBody>("CylinderBody");
+		body = GetNode<KinematicBody>("CubeBody");
 		startRot = RotationDegrees;
 	}
 	

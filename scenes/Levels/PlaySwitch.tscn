@@ -7,7 +7,6 @@
 extents = Vector3( 1.42535, 0.570948, 1.39209 )
 
 [node name="Switch" type="StaticBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.24622, -46 )
 script = ExtResource( 2 )
 
 [node name="CSGCylinder" type="CSGCylinder" parent="."]
