@@ -16,32 +16,31 @@ public class Elevator : GameObject
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		elevator = GetChild<KinematicBody>(0);
-		startPos = elevator.Translation;
+		elevator = GetNode("ElevatorBody") as KinematicBody;
+		startPos = Translation;
 		currPos = startPos;
+		GD.Print(elevator);
 	}
 	
 	private float SetYVel(float time)
 	{
-		float yVel = (float)Math.Sin(time * freq) * amp;
-		return yVel;
+		return (float)Math.Sin(time * freq) * amp;
 	}
 
 	public override void _PhysicsProcess(float delta)
 	{
+		Vector3 elevPos = Translation;
 		time += delta;
-		//velocity.y = SetYVel(time);
-		currPos.y = Mathf.Lerp(currPos.y, SetYVel(time), .2f);
-		elevator.Translation = currPos;
-		//MoveAndSlide(velocity, Vector3.Zero, false, 4, .785398f, true);
+		elevPos.y = Mathf.Lerp(elevPos.y, SetYVel(time), .2f);
+		Translation = elevPos;
 	}
 	
 	protected override void Reset()
 	{
-		GD.Print("Elevator Reset");
+		//GD.Print("Elevator Reset");
 		time = 0;
-		velocity.y = 0;
+		//velocity.y = 0;
 		currPos = startPos;
-		elevator.Translation = currPos;
+		Translation = currPos;
 	}
 }
