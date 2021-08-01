@@ -26,7 +26,7 @@ public class Player : Spatial
 	private AnimationPlayer animator;
 	
 	[Signal]
-	public delegate void on_collect(int amount);
+	public delegate void on_collect(int amount, int newLives);
 	
 	[Signal]
 	public delegate void on_reset();
@@ -231,13 +231,14 @@ public class Player : Spatial
 	{
 		if(area is Collectable)
 		{
+			int scoreValue = 50;
 			collected++;
 			if(collected > 100)
 			{
 				lives++;
 				collected = 1;
 			}
-			EmitSignal(nameof(on_collect), 50);
+			EmitSignal(nameof(on_collect), scoreValue);
 		}
 	}
 }

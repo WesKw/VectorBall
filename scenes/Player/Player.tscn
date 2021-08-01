@@ -1,22 +1,16 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://src/Player/PlayerBody.cs" type="Script" id=2]
-[ext_resource path="res://assets/balltexture.png" type="Texture" id=3]
 [ext_resource path="res://assets/glasstexture.jpg" type="Texture" id=4]
 
 [sub_resource type="PhysicsMaterial" id=1]
 rough = true
-bounce = 0.5
+bounce = 0.45
 
 [sub_resource type="SpatialMaterial" id=2]
-flags_transparent = true
-params_cull_mode = 1
+params_cull_mode = 2
 albedo_texture = ExtResource( 4 )
-clearcoat_enabled = true
-clearcoat = 0.75
-clearcoat_gloss = 1.0
-clearcoat_texture = ExtResource( 3 )
 depth_enabled = true
 depth_scale = 2.0
 depth_deep_parallax = false
@@ -113,8 +107,8 @@ script = ExtResource( 2 )
 operation = 1
 snap = 0.0001
 radius = 0.5
-radial_segments = 40
-rings = 40
+radial_segments = 20
+rings = 20
 material = SubResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody"]

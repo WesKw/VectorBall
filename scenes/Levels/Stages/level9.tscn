@@ -62,7 +62,7 @@ depth = 0.5
 material = ExtResource( 7 )
 
 [node name="CSGBox4" type="CSGBox" parent="Geometry"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.38917, -77.7385 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.54772, -77.7385 )
 use_collision = true
 width = 9.99131
 height = 0.5

@@ -1,41 +1,29 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Levels/Banana.cs" type="Script" id=1]
-[ext_resource path="res://assets/advanced.tres" type="Material" id=2]
 [ext_resource path="res://scenes/Levels/PlaySwitch.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/checkerkboard.png" type="Texture" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
-albedo_color = Color( 0.733333, 0.32549, 0, 1 )
+albedo_color = Color( 0.992157, 1, 0, 1 )
 albedo_texture = ExtResource( 4 )
 
 [node name="Banana" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="Geometry" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 
-[node name="CSGPolygon" type="CSGPolygon" parent="Geometry"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
-use_collision = true
-polygon = PoolVector2Array( 0, -2, 0, 1, 7, 4, 6, 1 )
-material = ExtResource( 2 )
+[node name="KinematicBody" type="KinematicBody" parent="Geometry"]
 
-[node name="CSGPolygon2" type="CSGPolygon" parent="Geometry"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 6, 0, -1 )
-use_collision = true
-polygon = PoolVector2Array( 0, 0, 1, 3, 11, 5, 10, 3 )
-material = ExtResource( 2 )
+[node name="CollisionPolygon" type="CollisionPolygon" parent="Geometry/KinematicBody"]
+depth = 2.0
+polygon = PoolVector2Array( 0.103672, 0.052197, 3.1411, 5.20438, 6.86611, 9.27, 13.6352, 12.4101, 21.104, 13.0748, 22.9799, 14.6581, 23.5884, 9.60887, 21.2533, 10.8182, 14.8738, 8.78453, 10.0664, 6.04814, 7.40269, 2.34762, 2.30257, -0.570547 )
 
-[node name="CSGPolygon3" type="CSGPolygon" parent="Geometry"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 15, 0, -3 )
-use_collision = true
-polygon = PoolVector2Array( 1, 1, 2, 3, 13, 3, 11, 0 )
-material = ExtResource( 2 )
-
-[node name="CSGPolygon4" type="CSGPolygon" parent="Geometry"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 26, 0, -2 )
-use_collision = true
-polygon = PoolVector2Array( 0, 1, 2, 4, 7, 1, 2, -5 )
+[node name="CSGPolygon" type="CSGPolygon" parent="Geometry/KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+polygon = PoolVector2Array( 0.104, 0.052, 3.141, 5.204, 6.866, 9.27, 13.635, 12.41, 21.104, 13.057, 22.98, 14.658, 23.588, 9.609, 21.253, 10.818, 14.874, 8.785, 10.066, 6.048, 7.403, 2.348, 2.303, -0.057 )
+depth = 2.0
 material = SubResource( 1 )
 
 [node name="Switch" parent="." instance=ExtResource( 3 )]

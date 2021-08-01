@@ -26,10 +26,13 @@ depth = 30.0
 material = ExtResource( 4 )
 
 [node name="Goal" parent="Geometry" instance=ExtResource( 8 )]
-transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -33, 1, -65 )
+transform = Transform( -2.23517e-07, 0, 1, 0, 1, 0, -1, 0, -2.23517e-07, -42, 1, -55 )
 
 [node name="Banana" parent="Geometry" instance=ExtResource( 5 )]
 transform = Transform( 0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 0, -1, -20 )
+
+[node name="Geometry" parent="Geometry/Banana" index="0"]
+transform = Transform( 1, 0, -7.10543e-15, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0.398716, 0, 0.333853 )
 
 [node name="Switch" parent="Geometry/Banana" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.6561, 0.660016, -14.8035 )

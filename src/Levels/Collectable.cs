@@ -21,7 +21,7 @@ public class Collectable : Area
 	
 	private void _on_Collectable_body_entered(object body)
 	{
-		if(body is PlayerBody) { animator.Play("Collected"); }
+		if(body is PlayerBody) { animator.Play("Collected"); speed *= 2f; }
 	}
 	
 	private void _on_AnimationPlayer_animation_finished(String anim_name)

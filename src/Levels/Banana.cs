@@ -26,12 +26,12 @@ public class Banana : GameObject
 			float speed = .2f;
 			Vector3 geometryRot = geometry.RotationDegrees;
 			Vector3 geometryTranslation = geometry.Translation;
-			geometryRot.y = Mathf.Lerp(geometryRot.y, 165f, speed);
-			geometryTranslation.x = Mathf.Lerp(geometryTranslation.x, -5f, speed);
-			geometryTranslation.z = Mathf.Lerp(geometryTranslation.z, -36f, speed);
+			geometryRot.y = Mathf.Lerp(geometryRot.y, 90f, speed);
+			geometryTranslation.x = Mathf.Lerp(geometryTranslation.x, 35f, speed);
+			geometryTranslation.z = Mathf.Lerp(geometryTranslation.z, -28f, speed);
 			geometry.RotationDegrees = geometryRot;
 			geometry.Translation = geometryTranslation;
-			if(geometryRot.y >= 165.0f) doAction = false;
+			if(geometryRot.y >= 90.0f) doAction = false;
 		}
 	}
 	

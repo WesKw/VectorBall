@@ -119,9 +119,9 @@ public class GameUI : Control
 	{
 		//GetNode<Label>("MarginContainer/WorldText/LevelName").Visible = false;
 		GetNode<Label>("MarginContainer/WorldText/LevelName").Text = levelName;
-		//animator.AssignedAnimation = "ShowLevel";
-		//animator.Seek(0);
-		//animator.Play("ShowLevel");
+		animator.AssignedAnimation = "ShowLevel";
+		animator.Seek(0);
+		animator.Play("ShowLevel");
 	}
 	
 	private void _on_Button_pressed()

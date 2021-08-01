@@ -12,9 +12,8 @@ public class Main : Spatial
 	private string[] levelList = {  "Beginner", "Split", "Downhill", "Uphill", "Sideways",
 									"Elevator", "Button", "Rotation", "Airtime", "Exam", 
 									"Pitstop", "Hole-in-one", "Funnel", "Spinning Prisms",
-									"Shitty Banana" };
+									"Shitty Banana", "I Discovered Blender" };
 									
-	//private string[] levelList = { "BounceTest", "SlideTest", "SpeedTest" };
 	private Mode currentMode;
 	private bool reset;
 	private bool paused;

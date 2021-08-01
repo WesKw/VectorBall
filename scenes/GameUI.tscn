@@ -26,18 +26,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("MarginContainer/WorldText/LevelName:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
 
 [sub_resource type="Animation" id=3]
 length = 0.35
@@ -114,10 +102,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 2 ),
+"times": PoolRealArray( 0, 0.5, 1.2, 2 ),
 "transitions": PoolRealArray( 2, 2, 1.5, 1 ),
 "update": 0,
-"values": [ -0.25, -0.25, 0.5, 0.973 ]
+"values": [ 0.5, 0.5, 0.5, 0.973 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("MarginContainer/WorldText/LevelName:anchor_top")
@@ -126,10 +114,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 2 ),
+"times": PoolRealArray( 0, 0.5, 1.2, 2 ),
 "transitions": PoolRealArray( 2, 2, 1.5, 1 ),
 "update": 0,
-"values": [ -0.25, -0.25, 0.5, 0.973 ]
+"values": [ 0.5, 0.5, 0.5, 0.973 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("MarginContainer/WorldText/LevelName:anchor_left")
@@ -138,7 +126,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
+"times": PoolRealArray( 0, 1.2, 2 ),
 "transitions": PoolRealArray( 1, 1.5, 1 ),
 "update": 0,
 "values": [ 0.5, 0.5, 0.112 ]
@@ -150,7 +138,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
+"times": PoolRealArray( 0, 1.2, 2 ),
 "transitions": PoolRealArray( 1, 1.5, 1 ),
 "update": 0,
 "values": [ 0.5, 0.5, 0.112 ]
@@ -162,34 +150,46 @@ tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
+"times": PoolRealArray( 0, 1.2, 2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 2, 2 ), Vector2( 2, 2 ), Vector2( 1, 1 ) ]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("MarginContainer/WorldText/LevelName:modulate")
+tracks/5/path = NodePath("MarginContainer/WorldText/LevelName:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("MarginContainer/WorldText/LevelName:visible")
+tracks/6/path = NodePath("MarginContainer/WorldText/LevelName:percent_visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
 tracks/6/keys = {
+"times": PoolRealArray( 0, 0.6, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 1.0 ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("MarginContainer/WorldText/LevelName:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="GameUI" type="Control"]
@@ -219,20 +219,21 @@ margin_right = 954.0
 margin_bottom = 550.0
 
 [node name="LevelName" type="Label" parent="MarginContainer/WorldText"]
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.112
-anchor_top = 0.973
-anchor_right = 0.112
-anchor_bottom = 0.973
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 margin_left = -106.848
 margin_top = -15.1501
 margin_right = 106.152
 margin_bottom = 14.8499
+rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 106, 19 )
 custom_fonts/font = ExtResource( 3 )
 text = "Sample name"
 align = 1
 valign = 1
+percent_visible = 0.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -282,10 +283,10 @@ margin_bottom = 40.0
 rect_pivot_offset = Vector2( 20, 20 )
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/CameraView/ViewportContainer/Icon"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchor_left = 0.65
+anchor_top = 0.65
+anchor_right = 0.656
+anchor_bottom = 0.65
 margin_left = -32.0
 margin_top = -32.0
 margin_right = 32.0
@@ -408,7 +409,7 @@ custom_fonts/font = ExtResource( 3 )
 text = "GO"
 
 [node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color( 0, 0, 0, 0 )
+modulate = Color( 0, 0, 0, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )

@@ -3,6 +3,7 @@ using System;
 
 public class PlayerBody : RigidBody
 {
+	private bool grounded = true;
 	private bool reset;
 	private bool intro;
 	private Vector3 startPos = new Vector3(0, 3.0f, 0);
